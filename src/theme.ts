@@ -6,6 +6,11 @@ const theme = createTheme({
       main: "#3F9877",
       dark: "#005133",
     },
+    secondary: {
+      main: "#ffcc80",
+      dark: "#fb8c00",
+      contrastText: "#fafafa",
+    },
     background: {
       default: "#eeeeee",
     }
