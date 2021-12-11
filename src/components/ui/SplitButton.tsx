@@ -36,10 +36,6 @@ const SplitButton: React.FC<Props> = ({
   defaultSelected = options[0].key,
   ...buttonGroupProps
 }) => {
-  if (options.length === 0) {
-    return null;
-  }
-
   const [open, setOpen] = useState(false);
   const anchorRef = useRef<HTMLDivElement>(null);
   const [selectedKey, setSelectedKey] = useState(defaultSelected);
