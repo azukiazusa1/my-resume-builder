@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import Button from "@mui/material/Button";
 import ButtonGroup, { ButtonGroupProps } from "@mui/material/ButtonGroup";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
@@ -9,9 +9,23 @@ import Popper from "@mui/material/Popper";
 import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
 
+/**
+ * SplitButtonの選択肢
+ */
+export type Option = {
+  /** 選択肢を一意に特定する値 */
+  key: string;
+  /** 選択肢のラベル */
+  text: string;
+  /** 選択肢が無効かどうか */
+  disabled?: boolean;
+};
+
 type Props = ButtonGroupProps & {
-  options: { key: string; text: string; disabled?: boolean }[];
+  options: Option[];
+  /** 予め選択されている選択肢のkey */
   defaultSelected?: string;
+  /** 選択肢が変更された際に呼ばれる */
   onChange?: (key: string) => void;
 };
 
