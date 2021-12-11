@@ -1,9 +1,9 @@
-import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
-import Header from "../../components/layout/Header";
+import React from 'react';
+import { ComponentStory, ComponentMeta } from '@storybook/react';
+import Header from '../../components/layout/Header';
 
 export default {
-  title: "layout/Header",
+  title: 'layout/Header',
   component: Header,
 } as ComponentMeta<typeof Header>;
 
