@@ -1,6 +1,6 @@
 import { ThemeProvider } from '@mui/material/styles';
 import { ThemeProvider as Emotion10ThemeProvider } from 'emotion-theming';
-import defaultTheme from '../src/theme';
+import defaultTheme from '../src/lib/theme';
 
 const withThemeProvider = (Story, context) => {
   return (
