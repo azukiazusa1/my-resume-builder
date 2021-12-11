@@ -1,14 +1,14 @@
-const path = require("path");
+const path = require('path');
 
 module.exports = {
-  stories: ["../src/**/*.stories.mdx", "../src/**/*.stories.tsx"],
-  addons: ["@storybook/addon-links", "@storybook/addon-essentials"],
+  stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.tsx'],
+  addons: ['@storybook/addon-links', '@storybook/addon-essentials'],
   typescript: {
     check: true,
     checkOptions: {},
-    reactDocgen: "react-docgen-typescript",
+    reactDocgen: 'react-docgen-typescript',
     reactDocgenTypescriptOptions: {
-      include: ["../src/**/*.stories.mdx", "../src/**/*.stories.tsx"],
+      include: ['../src/**/*.stories.mdx', '../src/**/*.stories.tsx'],
     },
   },
   webpackFinal: async (config) => {
@@ -18,15 +18,9 @@ module.exports = {
         ...config.resolve,
         alias: {
           ...config.resolve.alias,
-          src: path.resolve(__dirname, "../src"),
-          "@emotion/core": path.resolve(
-            __dirname,
-            "../node_modules/@emotion/react"
-          ),
-          "emotion-theming": path.resolve(
-            __dirname,
-            "../node_modules/@emotion/react"
-          ),
+          src: path.resolve(__dirname, '../src'),
+          '@emotion/core': path.resolve(__dirname, '../node_modules/@emotion/react'),
+          'emotion-theming': path.resolve(__dirname, '../node_modules/@emotion/react'),
         },
       },
     };
