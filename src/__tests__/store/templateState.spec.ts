@@ -1,5 +1,5 @@
 import { renderRecoilHook, act } from 'react-recoil-hooks-testing-library';
-import { templateActions, templateSelectors, templateState } from '../../store/templateState';
+import { templateActions, templateSelectors } from '../../store/templateState';
 
 const { useTemplateItem, useTemplates } = templateSelectors;
 const { useAddField } = templateActions;

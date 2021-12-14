@@ -2,7 +2,7 @@ import React from 'react';
 import { FieldProps } from './Form';
 import TextField from '@mui/material/TextField';
 
-const ShortTextField: React.FC<FieldProps> = ({ label, value, onChange }) => {
+const ShortTextField: React.FC<FieldProps<string>> = ({ label, value, onChange }) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onChange(event.target.value);
   };

@@ -19,13 +19,17 @@ type BaseField<T extends string, U extends Record<string, unknown> = {}> = {
 
 type ShortTextField = BaseField<'shortText'>
 
+type ShortTextWithRubyField = BaseField<'shortTextWithRuby'>
+
+export type ShortTextWithRubyValue = { ruby: string, value: string }
+
 type LongTextField = BaseField<'longText'>
 
 type NumberField = BaseField<'number'>
 
 type DateField = BaseField<'date'>
 
-export type Field = ShortTextField | LongTextField | NumberField | DateField
+export type Field = ShortTextField | ShortTextWithRubyField | LongTextField | NumberField | DateField
 
 export type TemplateState = {
   templates: Template[];
