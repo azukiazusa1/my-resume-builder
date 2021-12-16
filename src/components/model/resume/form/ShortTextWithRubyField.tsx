@@ -8,8 +8,32 @@ const ShortTextField: React.FC<FieldProps<ShortTextWithRubyValue>> = ({
   value,
   onChange,
 }) => {
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    // onChange(event.target.value);
+  const handleChangeRuby = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (value) {
+      onChange({
+        ...value,
+        ruby: event.target.value,
+      });
+    } else {
+      onChange({
+        ruby: event.target.value,
+        value: '',
+      });
+    }
+  };
+
+  const handleChangeShortText = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (value) {
+      onChange({
+        ...value,
+        value: event.target.value,
+      });
+    } else {
+      onChange({
+        ruby: '',
+        value: event.target.value,
+      });
+    }
   };
 
   return (
@@ -19,18 +43,20 @@ const ShortTextField: React.FC<FieldProps<ShortTextWithRubyValue>> = ({
         InputLabelProps={{ sx: { fontSize: '0.75rem' } }}
         label="ふりがな"
         value={value?.ruby}
-        onChange={handleChange}
+        onChange={handleChangeRuby}
         variant="outlined"
         size="small"
         fullWidth
+        inputProps={{ 'data-testid': 'ruby' }}
       />
       <TextField
         sx={{ mt: 1 }}
         label={label}
         value={value?.value}
-        onChange={handleChange}
+        onChange={handleChangeShortText}
         variant="outlined"
         fullWidth
+        inputProps={{ 'data-testid': 'shortText' }}
       />
     </>
   );

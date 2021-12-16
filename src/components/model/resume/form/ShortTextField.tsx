@@ -8,7 +8,14 @@ const ShortTextField: React.FC<FieldProps<string>> = ({ label, value, onChange }
   };
 
   return (
-    <TextField label={label} value={value} onChange={handleChange} variant="outlined" fullWidth />
+    <TextField
+      label={label}
+      value={value}
+      onChange={handleChange}
+      variant="outlined"
+      fullWidth
+      inputProps={{ 'data-testid': 'shortText' }}
+    />
   );
 };
 
