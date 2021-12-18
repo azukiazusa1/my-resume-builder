@@ -10,7 +10,7 @@
     "format": "prettier --write --ignore-path .gitignore './**/*.{js,jsx,ts,tsx,json,css}'",
     "test": "jest",
     "test:watch": "jest --watch",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook"
   },
   "dependencies": {
@@ -43,10 +43,15 @@
     "eslint-config-next": "12.0.7",
     "eslint-config-prettier": "^8.3.0",
     "jest": "^27.4.3",
+    "msw": "^0.36.3",
+    "msw-storybook-addon": "^1.5.0",
     "prettier": "^2.5.1",
     "react-recoil-hooks-testing-library": "^0.1.0",
     "react-test-renderer": "^17.0.2",
     "ts-jest": "^27.1.1",
     "typescript": "4.5.2"
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }
