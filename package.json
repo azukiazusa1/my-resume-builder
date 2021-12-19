@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:mock": "NEXT_PUBLIC_API_MOCKING=enabled next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint --dir src",
@@ -10,7 +11,7 @@
     "format": "prettier --write --ignore-path .gitignore './**/*.{js,jsx,ts,tsx,json,css}'",
     "test": "jest",
     "test:watch": "jest --watch",
-    "storybook": "start-storybook -p 6006 -s public",
+    "storybook": "NEXT_PUBLIC_API_MOCKING=enabled start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook"
   },
   "dependencies": {
