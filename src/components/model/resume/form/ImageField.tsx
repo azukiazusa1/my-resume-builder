@@ -59,7 +59,7 @@ const ImageField: React.FC<FieldProps<string>> = ({ label, value, onChange }) =>
           borderStyle: `${isDragActive || (!value && !file) ? 'dashed' : 'none'}`,
         }}
       >
-        <input {...getInputProps()} />
+        <input data-testid="drop-input" {...getInputProps()} />
         {file || value ? (
           <Image src={file || value || ''} alt={label} width={128} height={160} />
         ) : (
