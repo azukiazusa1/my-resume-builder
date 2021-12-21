@@ -29,7 +29,13 @@ type NumberField = BaseField<'number'>
 
 type DateField = BaseField<'date'>
 
-export type Field = ShortTextField | ShortTextWithRubyField | LongTextField | NumberField | DateField
+type ListField = BaseField<'list'>
+
+type TimeLineField = BaseField<'timeLine'>
+
+type TableField = BaseField<'table'>
+
+export type Field = ShortTextField | ShortTextWithRubyField | LongTextField | NumberField | DateField | ListField | TimeLineField | TableField
 
 export type TemplateState = {
   templates: Template[];
