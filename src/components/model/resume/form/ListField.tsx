@@ -18,7 +18,6 @@ const ItemList: React.FC<{ value: string[]; onClick: (index: number) => void }> 
   onClick,
 }) => {
   const handleClick = (index: number) => {
-    console.log({ index });
     onClick(index);
   };
   return (

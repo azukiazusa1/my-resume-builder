@@ -9,6 +9,10 @@ import Head from 'next/head';
 
 const isDev = process.env.NODE_ENV === 'development';
 
+if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
+  require('../../.mocks');
+}
+
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <RecoilRoot>

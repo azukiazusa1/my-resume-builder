@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 import AppBar from '@mui/material/AppBar';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
@@ -31,6 +32,7 @@ const options: Option[] = [
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'] as const;
 
 export default function ButtonAppBar() {
+  const router = useRouter();
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -40,6 +42,10 @@ export default function ButtonAppBar() {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const handleChange = (key: string) => {
+    router.push(`/resume/${key}/create`);
   };
 
   return (
@@ -92,6 +98,7 @@ export default function ButtonAppBar() {
               )}
               <SplitButton
                 options={options}
+                onChangeKey={(key: string) => handleChange(key)}
                 color="inherit"
                 variant="outlined"
                 sx={{ display: { xs: 'none', md: 'flex' } }}

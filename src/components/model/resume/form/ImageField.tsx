@@ -11,31 +11,34 @@ const ImageField: React.FC<FieldProps<string>> = ({ label, value, onChange }) =>
   const [file, setFile] = useState<string | null>(null);
   const [error, setError] = useState(false);
 
-  const onDrop = useCallback(async (acceptedFiles: File[]) => {
-    acceptedFiles.forEach((file) => {
-      setFile(URL.createObjectURL(file));
-    });
-
-    try {
-      setError(false);
-      const formData = new FormData();
-      formData.append('file', acceptedFiles[0]);
-      const { data } = await httpClient.post<{ url: string }>('/api/upload', {
-        data: formData,
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
+  const onDrop = useCallback(
+    async (acceptedFiles: File[]) => {
+      acceptedFiles.forEach((file) => {
+        setFile(URL.createObjectURL(file));
       });
-      onChange(data.url);
-    } catch (e) {
-      setError(true);
-    } finally {
-      if (file) {
-        URL.revokeObjectURL(file);
+
+      try {
+        setError(false);
+        const formData = new FormData();
+        formData.append('file', acceptedFiles[0]);
+        const { data } = await httpClient.post<{ url: string }>('/api/upload', {
+          data: formData,
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+        onChange(data.url);
+      } catch (e) {
+        setError(true);
+      } finally {
+        if (file) {
+          URL.revokeObjectURL(file);
+        }
+        setFile(null);
       }
-      setFile(null);
-    }
-  }, []);
+    },
+    [file, onChange],
+  );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
