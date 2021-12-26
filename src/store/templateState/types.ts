@@ -1,3 +1,5 @@
+import { GridColumns, GridRowsProp } from '@mui/x-data-grid';
+
 export type Template = {
   id: string;
   title: string;
@@ -34,6 +36,10 @@ type ListField = BaseField<'list'>
 type TimeLineField = BaseField<'timeLine'>
 
 type TableField = BaseField<'table'>
+
+export type TableFieldValue = GridRowsProp
+
+export type TableFieldOptions = { columns: GridColumns }
 
 export type Field = ShortTextField | ShortTextWithRubyField | LongTextField | NumberField | DateField | ListField | TimeLineField | TableField
 

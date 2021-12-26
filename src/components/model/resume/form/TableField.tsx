@@ -1,11 +1,12 @@
 import React, { useCallback } from 'react';
-import { DataGrid, GridColumns, GridRowsProp, GridCellEditCommitParams } from '@mui/x-data-grid';
+import { DataGrid, GridCellEditCommitParams } from '@mui/x-data-grid';
 import Typography from '@mui/material/Typography';
-import { FieldProps } from './Form';
+import type { FieldProps } from './Form';
+import type { TableFieldValue, TableFieldOptions } from '@/store/templateState/types';
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
 
-const TableField: React.FC<FieldProps<GridRowsProp, { columns: GridColumns }>> = ({
+const TableField: React.FC<FieldProps<TableFieldValue, TableFieldOptions>> = ({
   label,
   value = [],
   onChange,
