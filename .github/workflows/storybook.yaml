@@ -1,36 +1,31 @@
-name: storybook
+name: deploy
 
 on:
-  pull_request:
-    types: [opened, synchronize]
+  push:
+    branches:
+      - main
+      - master
+      - develop
 
 jobs:
-  Preview-Deploy:
+  deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v1
-
-      - name: Enable node
-        uses: actions/setup-node@v1
-        with:
-          node-version: 14.x
-
-      - name: Install dependencies
+      - uses: actions/checkout@v2
+      - name: install packages
         run: yarn install
-
-      - name: Build storybook
-        run: yarn build-storybook -o ./dist/storybook
-
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+      - name: build storybook
+        run: yarn build-storybook
+      - name: deploy storybook
+        uses: JamesIves/github-pages-deploy-action@4.1.0
         with:
-          personal_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
-
-      - name: Create comments
-        run: |
-          echo "1st" >> comments
-          echo "2nd" >> comments
-          echo "${{ env.GITHUB_REPOSITORY }}" >> comments
+          branch: gh-pages
+          folder: build
+      - name: Create comment
+        uses: peter-evans/create-or-update-comment@v1
+        with:
+          issue-number: $${github.event.pull_request.number}
+          body: |
+            Storybook をデプロイしました。
+            - https://azukiazusa1.github.io/my-resume-builder/
+          reactions: 'eyes'
