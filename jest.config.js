@@ -15,5 +15,6 @@ module.exports = {
   testPathIgnorePatterns: ['/node_modules/', '<rootDir>/src/__tests__/utils'],
   moduleNameMapper: {
     '^lodash-es$': 'lodash',
+    '@/(.*)$': '<rootDir>/src/$1',
   },
 };
