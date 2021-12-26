@@ -42,11 +42,12 @@ const TableField: React.FC<FieldProps<TableFieldValue, TableFieldOptions>> = ({
   };
 
   return (
-    <div style={{ height: 300, width: '100%' }}>
+    <>
       <Typography variant="h5" component="label">
         {label}
       </Typography>
       <DataGrid
+        autoHeight
         rows={value}
         columns={options.columns}
         onCellEditCommit={handleCellEditCommit}
@@ -54,11 +55,10 @@ const TableField: React.FC<FieldProps<TableFieldValue, TableFieldOptions>> = ({
         disableColumnMenu
         hideFooter
       />
-      <div style={{ flexGrow: 1 }}></div>
       <Button variant="outlined" startIcon={<AddIcon />} onClick={addRow}>
         行を追加
       </Button>
-    </div>
+    </>
   );
 };
 

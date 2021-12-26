@@ -1,13 +1,13 @@
-import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import NumberField from '../../../../components/model/resume/form/NumberField';
+import WithStorybook from '@/stories/utils/WithStorybook';
 
 export default {
   title: 'model/resume/form/NumberField',
   component: NumberField,
 } as ComponentMeta<typeof NumberField>;
 
-const Template: ComponentStory<typeof NumberField> = (args) => <NumberField {...args} />;
+const Template: ComponentStory<typeof NumberField> = WithStorybook(NumberField);
 
 export const Default = Template.bind({});
 Default.args = {

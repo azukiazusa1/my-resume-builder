@@ -1,13 +1,13 @@
-import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import TableField from '../../../../components/model/resume/form/TableField';
+import WithStorybook from '@/stories/utils/WithStorybook';
 
 export default {
   title: 'model/resume/form/TableField',
   component: TableField,
 } as ComponentMeta<typeof TableField>;
 
-const Template: ComponentStory<typeof TableField> = (args) => <TableField {...args} />;
+const Template: ComponentStory<typeof TableField> = WithStorybook(TableField);
 
 export const Default = Template.bind({});
 Default.args = {

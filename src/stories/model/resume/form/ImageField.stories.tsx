@@ -1,15 +1,15 @@
-import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import ImageField from '../../../../components/model/resume/form/ImageField';
 import handlers from '../../../../mokcs/handlers';
 import { rest } from 'msw';
+import WithStorybook from '@/stories/utils/WithStorybook';
 
 export default {
   title: 'model/resume/form/ImageField',
   component: ImageField,
 } as ComponentMeta<typeof ImageField>;
 
-const Template: ComponentStory<typeof ImageField> = (args) => <ImageField {...args} />;
+const Template: ComponentStory<typeof ImageField> = WithStorybook(ImageField);
 
 export const Default = Template.bind({});
 Default.args = {

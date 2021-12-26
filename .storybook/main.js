@@ -18,7 +18,7 @@ module.exports = {
         ...config.resolve,
         alias: {
           ...config.resolve.alias,
-          src: path.resolve(__dirname, '../src'),
+          '@': path.resolve(__dirname, '../src'),
           '@emotion/core': path.resolve(__dirname, '../node_modules/@emotion/react'),
           'emotion-theming': path.resolve(__dirname, '../node_modules/@emotion/react'),
         },
