@@ -1,13 +1,13 @@
-import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import DateField from '../../../../components/model/resume/form/DateField';
+import WithStorybook from '@/stories/utils/WithStorybook';
 
 export default {
   title: 'model/resume/form/DateField',
   component: DateField,
 } as ComponentMeta<typeof DateField>;
 
-const Template: ComponentStory<typeof DateField> = (args) => <DateField {...args} />;
+const Template: ComponentStory<typeof DateField> = WithStorybook(DateField);
 
 export const Default = Template.bind({});
 Default.args = {

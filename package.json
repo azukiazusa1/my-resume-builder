@@ -13,7 +13,7 @@
     "coverage:ci": "jest --coverage --silent --ci --testLocationInResults --json --outputFile=\"report.json\"",
     "test:watch": "jest --watch",
     "storybook": "NEXT_PUBLIC_API_MOCKING=enabled start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook -o build -s ./stories/assets"
   },
   "dependencies": {
     "@date-io/dayjs": "^2.11.0",
