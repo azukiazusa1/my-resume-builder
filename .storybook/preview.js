@@ -1,6 +1,10 @@
 import { ThemeProvider } from '@mui/material/styles';
 import { ThemeProvider as Emotion10ThemeProvider } from 'emotion-theming';
-import defaultTheme from '../src/theme';
+import { initialize, mswDecorator } from 'msw-storybook-addon';
+import defaultTheme from '../src/lib/theme';
+
+// Initialize MSW
+initialize();
 
 const withThemeProvider = (Story, context) => {
   return (
@@ -12,4 +16,4 @@ const withThemeProvider = (Story, context) => {
   );
 };
 
-export const decorators = [withThemeProvider];
+export const decorators = [withThemeProvider, mswDecorator];

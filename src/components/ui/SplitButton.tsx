@@ -26,13 +26,13 @@ type Props = ButtonGroupProps & {
   /** 予め選択されている選択肢のkey */
   defaultSelected?: string;
   /** 選択肢が変更された際に呼ばれる */
-  onChange?: (key: string) => void;
+  onChangeKey?: (key: string) => void;
 };
 
 const SplitButton: React.FC<Props> = ({
   options,
   variant = 'contained',
-  onChange = () => {},
+  onChangeKey = () => {},
   defaultSelected = options[0].key,
   ...buttonGroupProps
 }) => {
@@ -44,7 +44,7 @@ const SplitButton: React.FC<Props> = ({
 
   const handleMenuItemClick = (key: string) => {
     setSelectedKey(key);
-    onChange(key);
+    onChangeKey(key);
     setOpen(false);
   };
 
@@ -67,7 +67,9 @@ const SplitButton: React.FC<Props> = ({
         ref={anchorRef}
         aria-label="split button"
       >
-        <Button onClick={() => onChange(selectedOption?.key ?? '')}>{selectedOption?.text}</Button>
+        <Button onClick={() => onChangeKey(selectedOption?.key ?? '')}>
+          {selectedOption?.text}
+        </Button>
         <Button
           size="small"
           aria-controls={open ? 'split-button-menu' : undefined}
