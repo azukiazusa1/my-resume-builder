@@ -95,7 +95,7 @@ describe('TableField component', () => {
     expect(props.onChange).toHaveBeenCalledWith([
       {
         id: 1,
-        yearMonth: '2020/03/01',
+        yearMonth: '2010/03/01',
         personalHistory: 'edit value',
       },
       {
