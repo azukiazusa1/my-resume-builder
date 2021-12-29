@@ -38,7 +38,7 @@ const UserAvatar: React.FC<Props> = ({ username, image, sx }) => {
   return (
     <>
       <IconButton onClick={handleOpenUserMenu} sx={sx}>
-        <Avatar alt={username} src={image} />
+        <Avatar alt={username} src={image} data-testid="user-avatar" />
       </IconButton>
       <Menu
         sx={{ mt: '45px' }}

@@ -1,6 +1,6 @@
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import BackdropLoader from '@/components/ui/BackDropLoader';
+import BackdropLoader from '@/components/ui/BackdropLoader';
 import React, { useEffect } from 'react';
 
 /**
