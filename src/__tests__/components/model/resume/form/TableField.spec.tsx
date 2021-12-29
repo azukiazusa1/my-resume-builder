@@ -66,7 +66,7 @@ describe('TableField component', () => {
     const rows = getAllByRole('row');
 
     expect(headers.length).toBe(2);
-    expect(rows.length).toBe(4);
+    expect(rows.length).toBe(5);
   });
 
   test('「行を追加」ボタンを押した時valueの配列に要素が追加されてonChangeが呼ばれる', () => {
@@ -84,7 +84,7 @@ describe('TableField component', () => {
     ]);
   });
 
-  test.only('セルに入力した時onChangeが呼ばれる', () => {
+  test('セルに入力した時onChangeが呼ばれる', () => {
     const { getAllByRole } = render(<TableField {...props} />);
     const cell = getAllByRole('cell');
 

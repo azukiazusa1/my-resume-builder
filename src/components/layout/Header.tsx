@@ -1,16 +1,15 @@
-import { useState } from 'react';
+import React from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useSession } from 'next-auth/react';
 import AppBar from '@mui/material/AppBar';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import Menu from '@mui/material/Menu';
 import SplitButton, { Option } from '../ui/SplitButton';
-import MenuItem from '@mui/material/MenuItem';
-import Avatar from '@mui/material/Avatar';
+import LinkButton from '@/components/ui/LinkButton';
+import UserAvatar from '@/components/model/user/UserAvatar';
 
 /**
  * SplitButton の選択肢
@@ -26,23 +25,10 @@ const options: Option[] = [
   },
 ];
 
-/**
- * ユーザーメニューの一覧
- */
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'] as const;
-
-export default function ButtonAppBar() {
+const Header = () => {
+  const { data: session } = useSession();
   const router = useRouter();
-  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
+  const user = session?.user;
 
   const handleChange = (key: string) => {
     router.push(`/resume/${key}/create`);
@@ -55,46 +41,21 @@ export default function ButtonAppBar() {
           <Container maxWidth="xl">
             <Toolbar disableGutters>
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                My Resume Builder
+                <Link href="/">
+                  <a style={{ color: 'inherit', textDecoration: 'none' }}>My Resume Builder</a>
+                </Link>
               </Typography>
 
-              {isLoggedIn ? (
-                <>
-                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, mr: { xs: 0, md: 2 } }}>
-                    <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                  </IconButton>
-                  <Menu
-                    sx={{ mt: '45px' }}
-                    id="menu-appbar"
-                    anchorEl={anchorElUser}
-                    anchorOrigin={{
-                      vertical: 'top',
-                      horizontal: 'right',
-                    }}
-                    keepMounted
-                    transformOrigin={{
-                      vertical: 'top',
-                      horizontal: 'right',
-                    }}
-                    open={Boolean(anchorElUser)}
-                    onClose={handleCloseUserMenu}
-                  >
-                    {settings.map((setting) => (
-                      <MenuItem key={setting}>
-                        <Typography textAlign="center">{setting}</Typography>
-                      </MenuItem>
-                    ))}
-                  </Menu>
-                </>
+              {!!user ? (
+                <UserAvatar
+                  username={user.name ?? ''}
+                  image={user.image ?? ''}
+                  sx={{ p: 0, mr: { xs: 0, md: 2 } }}
+                />
               ) : (
-                <Button
-                  variant="outlined"
-                  color="inherit"
-                  onClick={() => setIsLoggedIn((isLoggedIn) => !isLoggedIn)}
-                  sx={{ mr: 2 }}
-                >
-                  Login
-                </Button>
+                <LinkButton href="/login" variant="outlined" color="inherit" sx={{ mr: 2 }}>
+                  Log in
+                </LinkButton>
               )}
               <SplitButton
                 options={options}
@@ -109,4 +70,6 @@ export default function ButtonAppBar() {
       </Box>
     </header>
   );
-}
+};
+
+export default Header;
