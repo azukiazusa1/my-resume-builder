@@ -66,7 +66,7 @@ describe('TableField component', () => {
     const rows = getAllByRole('row');
 
     expect(headers.length).toBe(2);
-    expect(rows.length).toBe(4);
+    expect(rows.length).toBe(5);
   });
 
   test('「行を追加」ボタンを押した時valueの配列に要素が追加されてonChangeが呼ばれる', () => {
