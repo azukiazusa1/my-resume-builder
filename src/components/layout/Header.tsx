@@ -11,6 +11,7 @@ import Menu from '@mui/material/Menu';
 import SplitButton, { Option } from '../ui/SplitButton';
 import MenuItem from '@mui/material/MenuItem';
 import Avatar from '@mui/material/Avatar';
+import LinkButton from '@/components/ui/LinkButton';
 
 /**
  * SplitButton の選択肢
@@ -87,14 +88,9 @@ export default function ButtonAppBar() {
                   </Menu>
                 </>
               ) : (
-                <Button
-                  variant="outlined"
-                  color="inherit"
-                  onClick={() => setIsLoggedIn((isLoggedIn) => !isLoggedIn)}
-                  sx={{ mr: 2 }}
-                >
-                  Login
-                </Button>
+                <LinkButton href="/login" variant="outlined" color="inherit" sx={{ mr: 2 }}>
+                  Log in
+                </LinkButton>
               )}
               <SplitButton
                 options={options}

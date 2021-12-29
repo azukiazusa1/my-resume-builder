@@ -2,6 +2,7 @@ import GoogleButton from '@/components/ui/GoogleButton';
 import Card from '@mui/material/Card';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
+import { signIn } from 'next-auth/react';
 
 const LoginCard = () => {
   return (
@@ -22,7 +23,12 @@ const LoginCard = () => {
         ログイン
       </Typography>
       <Divider sx={{ width: '90%', mt: { xs: 2, md: 4 }, mb: { xs: 4, md: 6 } }} />
-      <GoogleButton sx={{ width: '90%' }}>Google でログイン</GoogleButton>
+      <GoogleButton
+        onClick={() => signIn('google', { callbackUrl: '/dashboard' })}
+        sx={{ width: '90%' }}
+      >
+        Google でログイン
+      </GoogleButton>
     </Card>
   );
 };
