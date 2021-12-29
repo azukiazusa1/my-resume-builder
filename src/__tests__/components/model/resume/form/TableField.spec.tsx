@@ -84,7 +84,7 @@ describe('TableField component', () => {
     ]);
   });
 
-  test.only('セルに入力した時onChangeが呼ばれる', () => {
+  test('セルに入力した時onChangeが呼ばれる', () => {
     const { getAllByRole } = render(<TableField {...props} />);
     const cell = getAllByRole('cell');
 
