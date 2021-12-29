@@ -13,14 +13,14 @@ export const Default = Template.bind({});
 
 Default.args = {
   username: 'Jhon',
-  src: 'https://cdn.vuetifyjs.com/images/john.jpg',
+  image: 'https://cdn.vuetifyjs.com/images/john.jpg',
 };
 
 export const WithSxProp = Template.bind({});
 
 WithSxProp.args = {
   username: 'Jhon',
-  src: 'https://cdn.vuetifyjs.com/images/john.jpg',
+  image: 'https://cdn.vuetifyjs.com/images/john.jpg',
   sx: {
     mt: 5,
     ml: 5,

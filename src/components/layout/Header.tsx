@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import AppBar from '@mui/material/AppBar';
@@ -39,7 +40,9 @@ const Header = () => {
           <Container maxWidth="xl">
             <Toolbar disableGutters>
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                My Resume Builder
+                <Link href="/">
+                  <a style={{ color: 'inherit', textDecoration: 'none' }}>My Resume Builder</a>
+                </Link>
               </Typography>
 
               {!!user ? (

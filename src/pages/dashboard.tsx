@@ -1,7 +1,12 @@
 import { NextPage } from 'next';
+import Auth from '@/lib/auth/Auth';
 
 const Dashboard: NextPage = () => {
-  return <div>dashboard page.</div>;
+  return (
+    <Auth>
+      <div>dashboard page.</div>;
+    </Auth>
+  );
 };
 
 export default Dashboard;

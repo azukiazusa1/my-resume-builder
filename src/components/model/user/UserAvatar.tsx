@@ -24,7 +24,7 @@ type Props = {
   sx?: SxProps;
 };
 
-const UserAvatar: React.FC<Props> = ({ username, src, sx }) => {
+const UserAvatar: React.FC<Props> = ({ username, image, sx }) => {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {

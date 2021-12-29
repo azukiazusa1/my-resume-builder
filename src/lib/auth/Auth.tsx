@@ -1,5 +1,6 @@
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
+import BackdropLoader from '@/components/ui/BackDropLoader';
 import React, { useEffect } from 'react';
 
 /**
@@ -21,7 +22,7 @@ const Auth: React.FC = ({ children }) => {
 
   // Session is being fetched, or no user.
   // If no user, useEffect() will redirect.
-  return <div>Loading...</div>;
+  return <BackdropLoader />;
 };
 
 export default Auth;
