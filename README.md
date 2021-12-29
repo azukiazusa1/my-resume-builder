@@ -62,18 +62,6 @@ GOOGLE_CLIENT_ID= // client id here...
 GOOGLE_CLIENT_SECRET= // client secret here...
 ```
 
-3. Create a valid secret on the command line via this openssl command.
-
-```bash
-openssl rand -base64 32
-```
-
-4. Set `SERCRET` to .env.local file
-
-```
-SECRET=
-```
-
 ## Authors
 
 - [azukiazusa1](https://github.com/azukiazusa1)
