@@ -2,7 +2,7 @@ import { renderRecoilHook, act } from 'react-recoil-hooks-testing-library';
 import { templateActions, templateSelectors } from '../../store/templateState';
 
 const { useTemplateItem, useTemplates } = templateSelectors;
-const { useAddField, useRemoveField } = templateActions;
+const { useAddField, useRemoveField, useEditTitle } = templateActions;
 
 describe('store/templateState/index.ts', () => {
   test('初期値ではテンプレートは2件', () => {
@@ -69,6 +69,26 @@ describe('store/templateState/index.ts', () => {
 
     act(() => {
       expect(() => action.current('hoge', 'name')).toThrowError('not found template id: hoge')
+    })
+  });
+
+
+  test('テンプレートのタイトルを編集する', () => {
+    const { result: action } = renderRecoilHook(() => useEditTitle())
+
+    act(() => {
+      action.current('resume', 'edit-title')
+    })
+
+    const { result } = renderRecoilHook(() => useTemplateItem('resume'))
+    expect(result.current.title).toBe('edit-title')
+  })
+
+  test('存在しないIDでタイトルを編集しようとしたとき、例外を返す', () => {
+    const { result: action } = renderRecoilHook(() => useEditTitle())
+
+    act(() => {
+      expect(() => action.current('hoge', 'title')).toThrowError('not found template id: hoge')
     })
   });
 })

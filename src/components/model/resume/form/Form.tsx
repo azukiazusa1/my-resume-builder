@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import Grid from '@mui/material/Grid';
 import CardContent from '@mui/material/CardContent';
-import { templateSelectors } from '@/store/templateState';
+import { templateSelectors, templateActions } from '@/store/templateState';
 import { fieldValueSelectors, fieldValueActions } from '@/store/filedValueState';
 import { Block, Field } from '@/store/templateState/types';
 
@@ -43,11 +43,13 @@ function componentMapping(type: Field['type'], props: FieldProps<any>) {
 
 const ResumeForm: React.FC<Props> = ({ id }) => {
   const { useTemplateItem } = templateSelectors;
+  const { useEditTitle } = templateActions;
   const { useFieldValueItem } = fieldValueSelectors;
   const { useSetFieldValue } = fieldValueActions;
   const fieldValue = useFieldValueItem(id);
   const setFieldValue = useSetFieldValue();
   const template = useTemplateItem(id);
+  const editTitle = useEditTitle();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -56,7 +58,7 @@ const ResumeForm: React.FC<Props> = ({ id }) => {
   return (
     <Card sx={{ p: 2 }}>
       <CardContent>
-        <Title title={template.title} onChange={() => {}} />
+        <Title title={template.title} onChange={(value) => edititle(id, value)} />
         <Box component="form" noValidate autoComplete="off" onSubmit={handleSubmit}>
           {template.fields.map((field) => (
             <Grid key={field.order} xs={gridCols[field.block]} sx={{ my: 2 }}>

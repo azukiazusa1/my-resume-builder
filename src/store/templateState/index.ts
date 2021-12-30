@@ -69,6 +69,22 @@ export const templateActions: TemplateActions = {
 
       })
     }
+  },
+  useEditTitle: () => {
+    const setState = useSetRecoilState(templateState)
+    return (id: string, title: string) => {
+      setState(prev => {
+        const index = prev.findIndex(v => v.id === id)
+        if (index === -1) {
+          throw new Error('not found template id: ' + id)
+        }
+
+        const copy = cloneDeep(prev[index])
+        copy.title = title
+
+        return replaceItemAtIndex(prev, index, copy)
+      })
+    }
   }
 }
 

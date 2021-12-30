@@ -49,6 +49,7 @@ export type TemplateState = Template[];
 export type TemplateActions = {
   useAddField: () => (id: string, field: Field) => void;
   useRemoveField: () => (id: string, fieldId: string) => void;
+  useEditTitle: () => (id: string, title: string) => void;
 }
 
 export type TemplateSelectors = {
