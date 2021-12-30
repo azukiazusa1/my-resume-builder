@@ -11,6 +11,7 @@ export type Block = 1 | 2 | 3
 export type Position = 'left' | 'center' | 'rigth'
 
 type BaseField<T extends string, U extends Record<string, unknown> = {}> = {
+  fieldId: string;
   label: string;
   order: number;
   position: Position;
@@ -43,13 +44,11 @@ export type TableFieldOptions = { columns: GridColumns }
 
 export type Field = ShortTextField | ShortTextWithRubyField | LongTextField | NumberField | DateField | ListField | TimeLineField | TableField
 
-export type TemplateState = {
-  templates: Template[];
-}
+export type TemplateState = Template[];
 
 export type TemplateActions = {
   useAddField: () => (id: string, field: Field) => void;
-  useRemoveField: () => (id: string, index: number) => void;
+  useRemoveField: () => (id: string, fieldId: string) => void;
 }
 
 export type TemplateSelectors = {

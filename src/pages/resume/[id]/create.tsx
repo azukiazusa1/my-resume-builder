@@ -2,7 +2,6 @@ import { useRouter } from 'next/router';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import ResumeForm from '../../../components/model/resume/form/Form';
-import { Template } from '../../../store/templateState/types';
 
 const Create = () => {
   const router = useRouter();

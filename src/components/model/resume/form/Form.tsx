@@ -1,14 +1,13 @@
 import React from 'react';
 import ShortTextField from './ShortTextField';
+import Title from '@/components/model/resume/Title';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import Grid from '@mui/material/Grid';
 import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
-import { templateSelectors } from '../../../../store/templateState';
-import { Block, Field } from '../../../../store/templateState/types';
-
-const { useTemplateItem } = templateSelectors;
+import { templateSelectors } from '@/store/templateState';
+import { fieldValueSelectors, fieldValueActions } from '@/store/filedValueState';
+import { Block, Field } from '@/store/templateState/types';
 
 type Props = {
   id: string;
@@ -43,21 +42,28 @@ function componentMapping(type: Field['type'], props: FieldProps<any>) {
 }
 
 const ResumeForm: React.FC<Props> = ({ id }) => {
+  const { useTemplateItem } = templateSelectors;
+  const { useFieldValueItem } = fieldValueSelectors;
+  const { useSetFieldValue } = fieldValueActions;
+  const fieldValue = useFieldValueItem(id);
+  const setFieldValue = useSetFieldValue();
   const template = useTemplateItem(id);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  };
 
   return (
     <Card sx={{ p: 2 }}>
       <CardContent>
-        <Typography variant="h4" component="h1">
-          {template.title}を作成
-        </Typography>
-        <Box component="form" noValidate autoComplete="off">
+        <Title title={template.title} onChange={() => {}} />
+        <Box component="form" noValidate autoComplete="off" onSubmit={handleSubmit}>
           {template.fields.map((field) => (
             <Grid key={field.order} xs={gridCols[field.block]} sx={{ my: 2 }}>
               {componentMapping(field.type, {
                 label: field.label,
-                value: '',
-                onChange: () => {},
+                value: fieldValue[field.fieldId],
+                onChange: (value) => setFieldValue(id, field.fieldId, value),
               })}
             </Grid>
           ))}
