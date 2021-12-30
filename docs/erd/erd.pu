@@ -1,0 +1,44 @@
+@startuml erd
+
+entity users {
+  + id: string
+  name: string
+  email: string
+  created_at: Date
+  updated_at: Date
+}
+
+entity templates {
+  + id: string
+  # user_id: string
+  title: string
+  created_at: Date
+  updated_at: Date
+}
+
+entity fields {
+  + id: string
+  # template_id: string
+  label: string
+  order: number
+  potision: string
+  block: string
+  type: string
+  options: object
+  created_at: Date
+  updated_at: Date
+}
+
+entity field_values {
+  + id: string
+  # field_id: string
+  template_id: string
+  value: any
+  created_at: Date
+  updated_at: Date
+}
+
+users ||-d-o{ templates
+templates ||-o{ fields
+fields - field_values
+@enduml
