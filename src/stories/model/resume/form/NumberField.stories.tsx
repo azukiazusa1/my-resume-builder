@@ -14,4 +14,7 @@ Default.args = {
   label: '年齢',
   value: 25,
   onChange: (value: number) => console.log(value),
+  options: {
+    unit: '歳',
+  },
 };

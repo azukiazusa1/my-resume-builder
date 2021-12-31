@@ -2,9 +2,10 @@ import React from 'react';
 import { fireEvent, render } from '@testing-library/react';
 import { FieldProps } from '../../../../../components/model/resume/form/Form';
 import ShortTextField from '../../../../../components/model/resume/form/ShortTextField';
+import { ShortTextFieldOptions } from '@/store/templateState/types';
 
 describe('ShortTextField component', () => {
-  let props: FieldProps<string>;
+  let props: FieldProps<string, ShortTextFieldOptions>;
 
   beforeEach(() => {
     props = {
@@ -26,6 +27,20 @@ describe('ShortTextField component', () => {
     const input = getByTestId('shortText') as HTMLInputElement;
 
     expect(input.value).toBe('test');
+  });
+
+  test('optionsを渡さなかった場合input type はtextが設定される', () => {
+    const { getByTestId } = render(<ShortTextField {...props} />);
+    const input = getByTestId('shortText') as HTMLInputElement;
+
+    expect(input.type).toBe('text');
+  });
+
+  test('optionsでinput type が設定できる', () => {
+    const { getByTestId } = render(<ShortTextField {...props} options={{ type: 'email' }} />);
+    const input = getByTestId('shortText') as HTMLInputElement;
+
+    expect(input.type).toBe('email');
   });
 
   test('フォームに入力した時onChangeが呼ばれる', () => {

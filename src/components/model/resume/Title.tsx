@@ -63,7 +63,7 @@ const Title: React.VFC<Props> = ({ title, sx, onChange }) => {
         </>
       ) : (
         <>
-          <Typography variant="h5" component="h1" sx={{ mr: 2, flexGrow: 1 }}>
+          <Typography variant="h4" component="h1" sx={{ mr: 2, flexGrow: 1 }}>
             {value}
           </Typography>
           <Button variant="outlined" startIcon={<EditIcon />} onClick={handleEditClick}>

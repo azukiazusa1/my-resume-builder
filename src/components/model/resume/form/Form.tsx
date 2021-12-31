@@ -1,13 +1,19 @@
 import React from 'react';
 import ShortTextField from './ShortTextField';
-import Title from '@/components/model/resume/Title';
+import ShortTextWithRubyField from './ShortTextWithRubyField';
+import LongTextField from './LongTextField';
+import ImageField from './ImageField';
+import NumberField from './NumberField';
+import DateField from './DateField';
+import ListField from './ListField';
+import TableField from './TableField';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import Grid from '@mui/material/Grid';
 import CardContent from '@mui/material/CardContent';
 import { templateSelectors, templateActions } from '@/store/templateState';
 import { fieldValueSelectors, fieldValueActions } from '@/store/filedValueState';
-import { Block, Field } from '@/store/templateState/types';
+import { Field } from '@/store/templateState/types';
 
 type Props = {
   id: string;
@@ -21,35 +27,52 @@ export type FieldProps<T, U = {}> = {
 };
 
 /**
- * ブロックのサイズに対応するgridのサイズ
- */
-const gridCols: Record<Block, number> = {
-  1: 4,
-  2: 6,
-  3: 12,
-} as const;
-
-/**
  * フィールドのタイプに対応するコンポーネント
  */
-function componentMapping(type: Field['type'], props: FieldProps<any>) {
-  switch (type) {
+function componentMapping(field: Field, value: any, onChange: (value: any) => void) {
+  switch (field.type) {
     case 'shortText':
-      return <ShortTextField {...props} />;
-    default:
-      return null;
+      return (
+        <ShortTextField
+          label={field.label}
+          options={field.options}
+          value={value}
+          onChange={onChange}
+        />
+      );
+    case 'shortTextWithRuby':
+      return <ShortTextWithRubyField label={field.label} value={value} onChange={onChange} />;
+    case 'longText':
+      return <LongTextField label={field.label} value={value} onChange={onChange} />;
+    case 'image':
+      return <ImageField label={field.label} value={value} onChange={onChange} />;
+    case 'number':
+      return (
+        <NumberField
+          label={field.label}
+          options={field.options}
+          value={value}
+          onChange={onChange}
+        />
+      );
+    case 'date':
+      return <DateField label={field.label} value={value} onChange={onChange} />;
+    case 'list':
+      return <ListField label={field.label} value={value} onChange={onChange} />;
+    case 'table':
+      return (
+        <TableField label={field.label} options={field.options} value={value} onChange={onChange} />
+      );
   }
 }
 
 const ResumeForm: React.FC<Props> = ({ id }) => {
   const { useTemplateItem } = templateSelectors;
-  const { useEditTitle } = templateActions;
   const { useFieldValueItem } = fieldValueSelectors;
   const { useSetFieldValue } = fieldValueActions;
   const fieldValue = useFieldValueItem(id);
   const setFieldValue = useSetFieldValue();
   const template = useTemplateItem(id);
-  const editTitle = useEditTitle();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -58,17 +81,23 @@ const ResumeForm: React.FC<Props> = ({ id }) => {
   return (
     <Card sx={{ p: 2 }}>
       <CardContent>
-        <Title title={template.title} onChange={(value) => edititle(id, value)} />
         <Box component="form" noValidate autoComplete="off" onSubmit={handleSubmit}>
-          {template.fields.map((field) => (
-            <Grid key={field.order} xs={gridCols[field.block]} sx={{ my: 2 }}>
-              {componentMapping(field.type, {
-                label: field.label,
-                value: fieldValue[field.fieldId],
-                onChange: (value) => setFieldValue(id, field.fieldId, value),
-              })}
-            </Grid>
-          ))}
+          <Grid container spacing={2} alignItems="flex-end">
+            {template.fields.map((field) => (
+              <Grid
+                item
+                key={field.fieldId}
+                xs={12}
+                md={field.block}
+                sx={{ my: 2 }}
+                data-testid="field"
+              >
+                {componentMapping(field, fieldValue[field.fieldId], (value) =>
+                  setFieldValue(id, field.fieldId, value),
+                )}
+              </Grid>
+            ))}
+          </Grid>
         </Box>
       </CardContent>
     </Card>

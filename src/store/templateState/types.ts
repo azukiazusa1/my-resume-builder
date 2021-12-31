@@ -6,21 +6,20 @@ export type Template = {
   fields: Field[];
 }
 
-export type Block = 1 | 2 | 3
+export type Block = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
 
-export type Position = 'left' | 'center' | 'rigth'
-
-type BaseField<T extends string, U extends Record<string, unknown> = {}> = {
+type BaseField<T extends string, U extends Record<string, unknown> | undefined = undefined> = {
   fieldId: string;
   label: string;
   order: number;
-  position: Position;
   block: Block;
   type: T;
-  options: U;
+  options?: U;
 }
 
-type ShortTextField = BaseField<'shortText'>
+export type ShortTextFieldOptions = { 'type': 'text' | 'number' | 'email' | 'tel' | 'password' | 'url' }
+
+type ShortTextField = BaseField<'shortText', ShortTextFieldOptions>
 
 type ShortTextWithRubyField = BaseField<'shortTextWithRuby'>
 
@@ -28,21 +27,24 @@ export type ShortTextWithRubyValue = { ruby: string, value: string }
 
 type LongTextField = BaseField<'longText'>
 
-type NumberField = BaseField<'number'>
+type ImageField = BaseField<'image'>
+
+export type NumberFieldOptions = { unit: string }
+
+type NumberField = BaseField<'number', NumberFieldOptions>
 
 type DateField = BaseField<'date'>
 
 type ListField = BaseField<'list'>
 
-type TimeLineField = BaseField<'timeLine'>
+export type TableFieldOptions = { columns: GridColumns }
 
-type TableField = BaseField<'table'>
+type TableField = BaseField<'table', TableFieldOptions>
 
 export type TableFieldValue = GridRowsProp
 
-export type TableFieldOptions = { columns: GridColumns }
 
-export type Field = ShortTextField | ShortTextWithRubyField | LongTextField | NumberField | DateField | ListField | TimeLineField | TableField
+export type Field = ShortTextField | ShortTextWithRubyField | LongTextField | ImageField | NumberField | DateField | ListField | TableField
 
 export type TemplateState = Template[];
 
