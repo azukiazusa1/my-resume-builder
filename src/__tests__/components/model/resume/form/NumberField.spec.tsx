@@ -1,10 +1,12 @@
 import React from 'react';
+import '@testing-library/jest-dom';
 import { fireEvent, render } from '@testing-library/react';
 import { FieldProps } from '../../../../../components/model/resume/form/Form';
 import NumberField from '../../../../../components/model/resume/form/NumberField';
+import { NumberFieldOptions } from '@/store/templateState/types';
 
 describe('NumberField component', () => {
-  let props: FieldProps<number>;
+  let props: FieldProps<number, NumberFieldOptions>;
 
   beforeEach(() => {
     props = {
@@ -26,6 +28,11 @@ describe('NumberField component', () => {
     const input = getByTestId('input') as HTMLInputElement;
 
     expect(input.value).toBe('25');
+  });
+
+  test('optionsでunitを渡した場合設定される', () => {
+    const { getByText } = render(<NumberField {...props} options={{ unit: '人' }} />);
+    expect(getByText('人')).toBeInTheDocument();
   });
 
   test('フォームに入力した時onChangeが呼ばれる', () => {
