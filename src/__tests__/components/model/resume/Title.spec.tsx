@@ -1,7 +1,9 @@
-import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
+
+import { fireEvent,render } from '@testing-library/react';
+import React from 'react';
+
 import Title from '@/components/model/resume/Title';
-import { render, fireEvent } from '@testing-library/react';
 
 describe('components/model/resume/Title', () => {
   test('props の title が描画される', () => {

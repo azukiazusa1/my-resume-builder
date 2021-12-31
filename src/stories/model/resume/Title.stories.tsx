@@ -1,7 +1,7 @@
+import { ComponentMeta,ComponentStory } from '@storybook/react';
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+
 import Title from '@/components/model/resume/Title';
-import WithStorybook from '@/stories/utils/WithStorybook';
 
 export default {
   title: 'model/resume/Title',

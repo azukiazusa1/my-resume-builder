@@ -1,17 +1,18 @@
-import React, { useState } from 'react';
-import { FieldProps } from './Form';
-import TextField from '@mui/material/TextField';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
+import CircleIcon from '@mui/icons-material/Circle';
+import DeleteIcon from '@mui/icons-material/Delete';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import IconButton from '@mui/material/IconButton';
 import ListItemText from '@mui/material/ListItemText';
-import CircleIcon from '@mui/icons-material/Circle';
-import DeleteIcon from '@mui/icons-material/Delete';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
+import React, { useState } from 'react';
+
+import { FieldProps } from './Form';
 
 const ItemList: React.FC<{ value: string[]; onClick: (index: number) => void }> = ({
   value,

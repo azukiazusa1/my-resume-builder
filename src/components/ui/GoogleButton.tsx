@@ -1,6 +1,6 @@
-import React from 'react';
 import GoogleIcon from '@mui/icons-material/Google';
 import Button from '@mui/material/Button';
+import React from 'react';
 
 const GoogleButton: React.FC<any> = ({ children, sx, onClick }) => {
   return (

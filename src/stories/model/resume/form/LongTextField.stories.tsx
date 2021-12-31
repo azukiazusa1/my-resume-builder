@@ -1,6 +1,8 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-import LongTextField from '../../../../components/model/resume/form/LongTextField';
+import { ComponentMeta,ComponentStory } from '@storybook/react';
+
 import WithStorybook from '@/stories/utils/WithStorybook';
+
+import LongTextField from '../../../../components/model/resume/form/LongTextField';
 
 export default {
   title: 'model/resume/form/LongTextField',

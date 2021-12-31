@@ -1,5 +1,6 @@
+import { ComponentMeta,ComponentStory } from '@storybook/react';
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+
 import BackdropLoader from '@/components/ui/BackdropLoader';
 
 export default {

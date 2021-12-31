@@ -1,7 +1,9 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { ComponentMeta,ComponentStory } from '@storybook/react';
+
+import WithStorybook from '@/stories/utils/WithStorybook';
+
 import ShortTextWithRubyField from '../../../../components/model/resume/form/ShortTextWithRubyField';
 import { ShortTextWithRubyValue } from '../../../../store/templateState/types';
-import WithStorybook from '@/stories/utils/WithStorybook';
 
 export default {
   title: 'model/resume/form/ShortTextWithRubyField',

@@ -1,10 +1,11 @@
-import React from 'react';
-import { useRouter } from 'next/router';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
+import { useRouter } from 'next/router';
+import React from 'react';
+
 import ResumeForm from '@/components/model/resume/form/Form';
 import Title from '@/components/model/resume/Title';
-import { templateSelectors, templateActions } from '@/store/templateState';
+import { templateActions,templateSelectors } from '@/store/templateState';
 
 const Edit = () => {
   const router = useRouter();

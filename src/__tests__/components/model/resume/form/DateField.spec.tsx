@@ -1,7 +1,8 @@
-import React from 'react';
 import { fireEvent, render } from '@testing-library/react';
-import { FieldProps } from '../../../../../components/model/resume/form/Form';
+import React from 'react';
+
 import DateField from '../../../../../components/model/resume/form/DateField';
+import { FieldProps } from '../../../../../components/model/resume/form/Form';
 
 describe('DateField component', () => {
   let props: FieldProps<string>;

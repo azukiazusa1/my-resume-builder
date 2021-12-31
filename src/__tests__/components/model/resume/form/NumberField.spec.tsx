@@ -1,9 +1,12 @@
-import React from 'react';
 import '@testing-library/jest-dom';
+
 import { fireEvent, render } from '@testing-library/react';
+import React from 'react';
+
+import { NumberFieldOptions } from '@/store/templateState/types';
+
 import { FieldProps } from '../../../../../components/model/resume/form/Form';
 import NumberField from '../../../../../components/model/resume/form/NumberField';
-import { NumberFieldOptions } from '@/store/templateState/types';
 
 describe('NumberField component', () => {
   let props: FieldProps<number, NumberFieldOptions>;

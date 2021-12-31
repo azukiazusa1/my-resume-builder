@@ -1,9 +1,11 @@
-import { atom, selector, selectorFamily, useSetRecoilState, useRecoilValue } from 'recoil'
-import { RecoilAtomKeys, RecoilSelectorKeys } from '../RecoilKeys'
 import { cloneDeep } from 'lodash-es'
-import type { Template, TemplateState, TemplateSelectors, TemplateActions, Field } from './types'
-import { replaceItemAtIndex } from '../../lib/utils'
+import { atom, selector, selectorFamily, useRecoilValue,useSetRecoilState } from 'recoil'
+
 import localStorageEffect from '@/store/effects/localStorageEffect'
+
+import { replaceItemAtIndex } from '../../lib/utils'
+import { RecoilAtomKeys, RecoilSelectorKeys } from '../RecoilKeys'
+import type { Field,Template, TemplateActions, TemplateSelectors, TemplateState } from './types'
 
 const initialTemplates = (): TemplateState => [
   {

@@ -1,7 +1,8 @@
-import React from 'react';
-import { FieldProps } from './Form';
 import TextField from '@mui/material/TextField';
+import React from 'react';
+
 import { ShortTextWithRubyValue } from '../../../../store/templateState/types';
+import { FieldProps } from './Form';
 
 const ShortTextField: React.FC<FieldProps<ShortTextWithRubyValue>> = ({
   label,

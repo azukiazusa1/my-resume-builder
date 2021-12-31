@@ -1,5 +1,6 @@
-import React from 'react';
 import { fireEvent, render } from '@testing-library/react';
+import React from 'react';
+
 import { FieldProps } from '../../../../../components/model/resume/form/Form';
 import ShortTextWithRubyField from '../../../../../components/model/resume/form/ShortTextWithRubyField';
 import { ShortTextWithRubyValue } from '../../../../../store/templateState/types';

@@ -1,8 +1,10 @@
-import React from 'react';
-import Auth from '@/lib/auth/Auth';
-import * as NextAuth from 'next-auth/react';
-import { render } from '@testing-library/react';
 import '@testing-library/jest-dom';
+
+import { render } from '@testing-library/react';
+import * as NextAuth from 'next-auth/react';
+import React from 'react';
+
+import Auth from '@/lib/auth/Auth';
 
 const pushMock = jest.fn();
 const useSessitonSpy = jest.spyOn(NextAuth, 'useSession');

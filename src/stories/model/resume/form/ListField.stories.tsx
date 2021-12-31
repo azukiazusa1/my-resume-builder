@@ -1,6 +1,8 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-import ListField from '../../../../components/model/resume/form/ListField';
+import { ComponentMeta,ComponentStory } from '@storybook/react';
+
 import WithStorybook from '@/stories/utils/WithStorybook';
+
+import ListField from '../../../../components/model/resume/form/ListField';
 
 export default {
   title: 'model/resume/form/ListField',

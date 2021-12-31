@@ -1,8 +1,10 @@
-import React from 'react';
 import { fireEvent, render } from '@testing-library/react';
+import React from 'react';
+
+import { ShortTextFieldOptions } from '@/store/templateState/types';
+
 import { FieldProps } from '../../../../../components/model/resume/form/Form';
 import ShortTextField from '../../../../../components/model/resume/form/ShortTextField';
-import { ShortTextFieldOptions } from '@/store/templateState/types';
 
 describe('ShortTextField component', () => {
   let props: FieldProps<string, ShortTextFieldOptions>;

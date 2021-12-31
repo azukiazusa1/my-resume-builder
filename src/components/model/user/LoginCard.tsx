@@ -1,8 +1,9 @@
-import GoogleButton from '@/components/ui/GoogleButton';
 import Card from '@mui/material/Card';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 import { signIn } from 'next-auth/react';
+
+import GoogleButton from '@/components/ui/GoogleButton';
 
 const LoginCard = () => {
   return (

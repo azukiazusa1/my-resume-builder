@@ -1,13 +1,14 @@
-import type { AppProps } from 'next/app';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/system';
-import { SessionProvider } from 'next-auth/react';
-import { RecoilRoot } from 'recoil';
-import DebugObserver from '../lib/DebugObserver';
-import Layout from '../components/layout/Layout';
-import theme from '../lib/theme';
+import type { AppProps } from 'next/app';
 import Head from 'next/head';
+import { SessionProvider } from 'next-auth/react';
 import React from 'react';
+import { RecoilRoot } from 'recoil';
+
+import Layout from '../components/layout/Layout';
+import DebugObserver from '../lib/DebugObserver';
+import theme from '../lib/theme';
 
 const isDev = process.env.NODE_ENV === 'development';
 
