@@ -23,10 +23,10 @@ const Edit = () => {
     <Container maxWidth="xl" sx={{ mt: 2 }}>
       <Title title={template.title} onChange={(value) => editTitle(id, value)} sx={{ mb: 4 }} />
       <Grid container spacing={2}>
-        <Grid item xs={8}>
+        <Grid item xs={12} lg={8}>
           <ResumeForm id={id as string} />
         </Grid>
-        <Grid item xs={4}>
+        <Grid item md={4} sx={{ display: { xs: 'none', lg: 'flex' } }}>
           2
         </Grid>
       </Grid>
