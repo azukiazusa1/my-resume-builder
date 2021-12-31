@@ -1,7 +1,8 @@
-import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-import ShortTextField from '../../../../components/model/resume/form/ShortTextField';
+import { ComponentMeta,ComponentStory } from '@storybook/react';
+
 import WithStorybook from '@/stories/utils/WithStorybook';
+
+import ShortTextField from '../../../../components/model/resume/form/ShortTextField';
 
 export default {
   title: 'model/resume/form/ShortTextField',

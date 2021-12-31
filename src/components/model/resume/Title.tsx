@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import EditIcon from '@mui/icons-material/Edit';
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { SxProps } from '@mui/system';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import EditIcon from '@mui/icons-material/Edit';
+import React, { useState } from 'react';
 
 type Props = {
   title: string;
-  onChange: (value: string) => void;
+  onChange: (_: string) => void;
   sx?: SxProps;
 };
 

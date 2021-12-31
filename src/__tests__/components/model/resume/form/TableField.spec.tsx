@@ -1,5 +1,6 @@
-import React from 'react';
 import { fireEvent, render } from '@testing-library/react';
+import React from 'react';
+
 import { FieldProps } from '@/components/model/resume/form/Form';
 import TableField from '@/components/model/resume/form/TableField';
 import type { TableFieldOptions, TableFieldValue } from '@/store/templateState/types';
@@ -70,7 +71,7 @@ describe('TableField component', () => {
   });
 
   test('「行を追加」ボタンを押した時valueの配列に要素が追加されてonChangeが呼ばれる', () => {
-    const { getByText, getAllByRole } = render(<TableField {...props} />);
+    const { getByText } = render(<TableField {...props} />);
     const addButton = getByText('行を追加');
 
     fireEvent.click(addButton);

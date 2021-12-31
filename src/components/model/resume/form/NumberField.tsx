@@ -1,8 +1,10 @@
-import React from 'react';
-import { FieldProps } from './Form';
-import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
+import TextField from '@mui/material/TextField';
+import React from 'react';
+
 import { NumberFieldOptions } from '@/store/templateState/types';
+
+import { FieldProps } from './Form';
 
 const NumberField: React.FC<FieldProps<number, NumberFieldOptions>> = ({
   label,

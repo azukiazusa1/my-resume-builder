@@ -1,7 +1,8 @@
-import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import BackdropLoader from '@/components/ui/BackdropLoader';
+import { useSession } from 'next-auth/react';
 import React, { useEffect } from 'react';
+
+import BackdropLoader from '@/components/ui/BackdropLoader';
 
 /**
  * ログインしているかどうかを判定する

@@ -1,6 +1,8 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-import TableField from '../../../../components/model/resume/form/TableField';
+import { ComponentMeta,ComponentStory } from '@storybook/react';
+
 import WithStorybook from '@/stories/utils/WithStorybook';
+
+import TableField from '../../../../components/model/resume/form/TableField';
 
 export default {
   title: 'model/resume/form/TableField',

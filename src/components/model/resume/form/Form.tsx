@@ -1,19 +1,21 @@
-import React from 'react';
-import ShortTextField from './ShortTextField';
-import ShortTextWithRubyField from './ShortTextWithRubyField';
-import LongTextField from './LongTextField';
-import ImageField from './ImageField';
-import NumberField from './NumberField';
-import DateField from './DateField';
-import ListField from './ListField';
-import TableField from './TableField';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
-import Grid from '@mui/material/Grid';
 import CardContent from '@mui/material/CardContent';
-import { templateSelectors, templateActions } from '@/store/templateState';
-import { fieldValueSelectors, fieldValueActions } from '@/store/filedValueState';
+import Grid from '@mui/material/Grid';
+import React from 'react';
+
+import { fieldValueActions,fieldValueSelectors } from '@/store/filedValueState';
+import {templateSelectors } from '@/store/templateState';
 import { Field } from '@/store/templateState/types';
+
+import DateField from './DateField';
+import ImageField from './ImageField';
+import ListField from './ListField';
+import LongTextField from './LongTextField';
+import NumberField from './NumberField';
+import ShortTextField from './ShortTextField';
+import ShortTextWithRubyField from './ShortTextWithRubyField';
+import TableField from './TableField';
 
 type Props = {
   id: string;

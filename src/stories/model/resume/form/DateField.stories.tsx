@@ -1,6 +1,8 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-import DateField from '../../../../components/model/resume/form/DateField';
+import { ComponentMeta,ComponentStory } from '@storybook/react';
+
 import WithStorybook from '@/stories/utils/WithStorybook';
+
+import DateField from '../../../../components/model/resume/form/DateField';
 
 export default {
   title: 'model/resume/form/DateField',

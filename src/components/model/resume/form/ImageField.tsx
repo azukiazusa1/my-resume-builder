@@ -1,11 +1,12 @@
-import React, { useCallback, useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import Image from 'next/image';
+import React, { useCallback,useState } from 'react';
 import { useDropzone } from 'react-dropzone';
+
+import httpClient from '../../../../lib/httpClient';
 import theme from '../../../../lib/theme';
 import { FieldProps } from './Form';
-import httpClient from '../../../../lib/httpClient';
-import Image from 'next/image';
 
 const ImageField: React.FC<FieldProps<string>> = ({ label, value, onChange }) => {
   const [file, setFile] = useState<string | null>(null);

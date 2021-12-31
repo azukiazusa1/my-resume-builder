@@ -1,7 +1,8 @@
-import React from 'react';
-import Edit from '@/components/model/resume/Edit';
 import { render } from '@testing-library/react';
+import React from 'react';
 import { RecoilRoot } from 'recoil';
+
+import Edit from '@/components/model/resume/Edit';
 
 jest.mock('next/router', () => ({
   useRouter: () => {

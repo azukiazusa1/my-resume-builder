@@ -1,8 +1,10 @@
-import Header from '@/components/layout/Header';
-import React from 'react';
-import * as NextAuth from 'next-auth/react';
-import { render } from '@testing-library/react';
 import '@testing-library/jest-dom';
+
+import { render } from '@testing-library/react';
+import * as NextAuth from 'next-auth/react';
+import React from 'react';
+
+import Header from '@/components/layout/Header';
 
 const useSessitonSpy = jest.spyOn(NextAuth, 'useSession');
 

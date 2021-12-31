@@ -1,10 +1,11 @@
-import React from 'react';
-import { fireEvent, render, waitFor, act } from '@testing-library/react';
-import { FieldProps } from '../../../../../components/model/resume/form/Form';
-import { server } from '../../../../../mokcs/server';
-import ImageField from '../../../../../components/model/resume/form/ImageField';
-import { setupServer } from 'msw/node';
+import { act,fireEvent, render, waitFor } from '@testing-library/react';
 import { rest } from 'msw';
+import { setupServer } from 'msw/node';
+import React from 'react';
+
+import { FieldProps } from '../../../../../components/model/resume/form/Form';
+import ImageField from '../../../../../components/model/resume/form/ImageField';
+import { server } from '../../../../../mokcs/server';
 
 const dropFile = (inputEl: HTMLElement) => {
   window.URL.createObjectURL = jest.fn().mockImplementation(() => 'url');

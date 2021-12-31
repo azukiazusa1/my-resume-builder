@@ -1,7 +1,8 @@
-import Guest from '@/lib/auth/Guest';
 import Box from '@mui/material/Box';
-import LoginCard from '@/components/model/user/LoginCard';
 import type { NextPage } from 'next';
+
+import LoginCard from '@/components/model/user/LoginCard';
+import Guest from '@/lib/auth/Guest';
 
 const Login: NextPage = () => {
   return (

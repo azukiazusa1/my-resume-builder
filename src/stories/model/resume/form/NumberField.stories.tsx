@@ -1,6 +1,8 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-import NumberField from '../../../../components/model/resume/form/NumberField';
+import { ComponentMeta,ComponentStory } from '@storybook/react';
+
 import WithStorybook from '@/stories/utils/WithStorybook';
+
+import NumberField from '../../../../components/model/resume/form/NumberField';
 
 export default {
   title: 'model/resume/form/NumberField',
