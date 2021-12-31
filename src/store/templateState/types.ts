@@ -17,7 +17,7 @@ type BaseField<T extends string, U extends Record<string, unknown> | undefined =
   options?: U;
 }
 
-export type ShortTextFieldOptions = { 'type': 'text' | 'number' | 'email' | 'tel' | 'password' | 'url' }
+export type ShortTextFieldOptions = { type: 'text' | 'number' | 'email' | 'tel' | 'password' | 'url' }
 
 type ShortTextField = BaseField<'shortText', ShortTextFieldOptions>
 
@@ -33,6 +33,8 @@ export type NumberFieldOptions = { unit: string }
 
 type NumberField = BaseField<'number', NumberFieldOptions>
 
+type CheckboxField = BaseField<'checkbox'>
+
 type DateField = BaseField<'date'>
 
 type ListField = BaseField<'list'>
@@ -43,8 +45,7 @@ type TableField = BaseField<'table', TableFieldOptions>
 
 export type TableFieldValue = GridRowsProp
 
-
-export type Field = ShortTextField | ShortTextWithRubyField | LongTextField | ImageField | NumberField | DateField | ListField | TableField
+export type Field = ShortTextField | ShortTextWithRubyField | LongTextField | ImageField | NumberField | CheckboxField | DateField | ListField | TableField
 
 export type TemplateState = Template[];
 
