@@ -81,7 +81,7 @@ const initialTemplates = (): TemplateState => [
               headerName: '年月',
               editable: true,
               type: 'date',
-              width: 200,
+              width: 150,
             },
             {
               field: 'personalHistory',
@@ -105,7 +105,7 @@ const initialTemplates = (): TemplateState => [
               headerName: '年月',
               editable: true,
               type: 'date',
-              width: 200,
+              width: 150,
             },
             {
               field: 'certification',

@@ -5,6 +5,7 @@ import type { FieldProps } from './Form';
 import type { TableFieldValue, TableFieldOptions } from '@/store/templateState/types';
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
+import dayjs from 'dayjs';
 
 const TableField: React.FC<FieldProps<TableFieldValue, TableFieldOptions>> = ({
   label,
@@ -18,8 +19,11 @@ const TableField: React.FC<FieldProps<TableFieldValue, TableFieldOptions>> = ({
   const handleCellEditCommit = useCallback(
     (params: GridCellEditCommitParams) => {
       const newValue = value.map((row) => {
+        console.log(params.value instanceof Date);
+        const value =
+          params.value instanceof Date ? dayjs(params.value).format('YYYY/MM/DD') : params.value;
         if (row.id === params.id) {
-          return { ...row, [params.field]: params.value };
+          return { ...row, [params.field]: value };
         } else {
           return row;
         }
