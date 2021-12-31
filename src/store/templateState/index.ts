@@ -1,11 +1,11 @@
 import { cloneDeep } from 'lodash-es'
-import { atom, selector, selectorFamily, useRecoilValue,useSetRecoilState } from 'recoil'
+import { atom, selector, selectorFamily, useRecoilValue, useSetRecoilState } from 'recoil'
 
 import localStorageEffect from '@/store/effects/localStorageEffect'
 
 import { replaceItemAtIndex } from '../../lib/utils'
 import { RecoilAtomKeys, RecoilSelectorKeys } from '../RecoilKeys'
-import type { Field,Template, TemplateActions, TemplateSelectors, TemplateState } from './types'
+import type { Field, Template, TemplateActions, TemplateSelectors, TemplateState } from './types'
 
 const initialTemplates = (): TemplateState => [
   {
@@ -147,14 +147,14 @@ const initialTemplates = (): TemplateState => [
         label: '配偶者',
         order: 13,
         block: 3,
-        type: 'number'
+        type: 'checkbox'
       },
       {
         fieldId: 'obligationToSupportSpouse',
         label: '配偶者の扶養義務',
         order: 14,
         block: 3,
-        type: 'number'
+        type: 'checkbox'
       },
       {
         fieldId: 'other',
