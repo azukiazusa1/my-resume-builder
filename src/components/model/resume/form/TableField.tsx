@@ -5,7 +5,7 @@ import { DataGrid, GridCellEditCommitParams } from '@mui/x-data-grid';
 import dayjs from 'dayjs';
 import React, { useCallback } from 'react';
 
-import type { TableFieldOptions,TableFieldValue } from '@/store/templateState/types';
+import type { TableFieldOptions, TableFieldValue } from '@/store/templateState/types';
 
 import type { FieldProps } from './Form';
 
@@ -21,7 +21,6 @@ const TableField: React.FC<FieldProps<TableFieldValue, TableFieldOptions>> = ({
   const handleCellEditCommit = useCallback(
     (params: GridCellEditCommitParams) => {
       const newValue = value.map((row) => {
-        console.log(params.value instanceof Date);
         const value =
           params.value instanceof Date ? dayjs(params.value).format('YYYY/MM/DD') : params.value;
         if (row.id === params.id) {

@@ -1,4 +1,4 @@
-import { act,fireEvent, render, waitFor } from '@testing-library/react';
+import { act, fireEvent, render, waitFor } from '@testing-library/react';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import React from 'react';
@@ -34,9 +34,8 @@ describe('ImageField component', () => {
   });
 
   describe('正常系', () => {
-    beforeAll(() => server.listen());
+    server.listen();
     afterEach(() => server.resetHandlers());
-    afterAll(() => server.close());
 
     test('propsで渡したlabelが設定される', () => {
       const { container } = render(<ImageField {...props} />);
@@ -74,6 +73,8 @@ describe('ImageField component', () => {
 
       await waitFor(expect(props.onChange).toHaveBeenCalled);
     });
+
+    server.close();
   });
 
   describe('異常系', () => {
@@ -84,9 +85,8 @@ describe('ImageField component', () => {
     ];
 
     const server = setupServer(...handlers);
-    beforeAll(() => server.listen());
+    server.listen();
     afterEach(() => server.resetHandlers());
-    afterAll(() => server.close());
 
     test('ファイルアップロードに失敗した時エラーメッセージが表示される', async () => {
       const { getByTestId, findByText } = render(<ImageField {...props} />);
@@ -96,5 +96,6 @@ describe('ImageField component', () => {
       expect(await findByText('ファイルのアップロード時にエラーが発生しました。')).toBeDefined();
       expect(props.onChange).not.toHaveBeenCalled();
     });
+    server.close();
   });
 });
