@@ -75,7 +75,7 @@ const AddressField: React.VFC<FieldProps<AddressFieldValue>> = ({ label, value, 
       <Grid item xs={12} alignItems="center">
         〒
         <TextField
-          sx={{ '& input': { paddingTop: '4px', paddingBottom: '4px' }, mx: 1 }}
+          sx={{ '& input': { paddingTop: '4px', paddingBottom: '4px' }, mx: 1, width: 50 }}
           InputLabelProps={{ sx: { fontSize: '0.75rem' } }}
           value={value?.postCodeFirst}
           onChange={handleChange}
@@ -90,7 +90,7 @@ const AddressField: React.VFC<FieldProps<AddressFieldValue>> = ({ label, value, 
         />
         ー
         <TextField
-          sx={{ '& input': { paddingTop: '4px', paddingBottom: '4px' }, mx: 1 }}
+          sx={{ '& input': { paddingTop: '4px', paddingBottom: '4px' }, mx: 1, width: 70 }}
           InputLabelProps={{ sx: { fontSize: '0.75rem' } }}
           value={value?.postCodeLast}
           onChange={handleChange}
