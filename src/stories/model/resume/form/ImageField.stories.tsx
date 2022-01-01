@@ -1,10 +1,9 @@
-import { ComponentMeta,ComponentStory } from '@storybook/react';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { rest } from 'msw';
 
+import ImageField from '@/components/model/resume/form/ImageField';
+import handlers from '@/mokcs/handlers';
 import WithStorybook from '@/stories/utils/WithStorybook';
-
-import ImageField from '../../../../components/model/resume/form/ImageField';
-import handlers from '../../../../mokcs/handlers';
 
 export default {
   title: 'model/resume/form/ImageField',

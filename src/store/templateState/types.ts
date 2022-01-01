@@ -35,6 +35,16 @@ type NumberField = BaseField<'number', NumberFieldOptions>
 
 type CheckboxField = BaseField<'checkbox'>
 
+type AddressField = BaseField<'address'>
+
+export type AddressFieldValue = {
+  postCodeFirst?: string;
+  postCodeLast?: string;
+  ruby?: string;
+  prefecture?: string;
+  address?: string;
+}
+
 type DateField = BaseField<'date'>
 
 type ListField = BaseField<'list'>
@@ -45,7 +55,7 @@ type TableField = BaseField<'table', TableFieldOptions>
 
 export type TableFieldValue = GridRowsProp
 
-export type Field = ShortTextField | ShortTextWithRubyField | LongTextField | ImageField | NumberField | CheckboxField | DateField | ListField | TableField
+export type Field = ShortTextField | ShortTextWithRubyField | LongTextField | ImageField | NumberField | CheckboxField | AddressField | DateField | ListField | TableField
 
 export type TemplateState = Template[];
 
