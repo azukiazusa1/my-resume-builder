@@ -34,8 +34,9 @@ describe('ImageField component', () => {
   });
 
   describe('正常系', () => {
-    server.listen();
+    beforeAll(() => server.listen());
     afterEach(() => server.resetHandlers());
+    afterAll(() => server.close());
 
     test('propsで渡したlabelが設定される', () => {
       const { container } = render(<ImageField {...props} />);
@@ -73,8 +74,6 @@ describe('ImageField component', () => {
 
       await waitFor(expect(props.onChange).toHaveBeenCalled);
     });
-
-    server.close();
   });
 
   describe('異常系', () => {
@@ -85,8 +84,9 @@ describe('ImageField component', () => {
     ];
 
     const server = setupServer(...handlers);
-    server.listen();
+    beforeAll(() => server.listen());
     afterEach(() => server.resetHandlers());
+    afterAll(() => server.close());
 
     test('ファイルアップロードに失敗した時エラーメッセージが表示される', async () => {
       const { getByTestId, findByText } = render(<ImageField {...props} />);
@@ -96,6 +96,5 @@ describe('ImageField component', () => {
       expect(await findByText('ファイルのアップロード時にエラーが発生しました。')).toBeDefined();
       expect(props.onChange).not.toHaveBeenCalled();
     });
-    server.close();
   });
 });
