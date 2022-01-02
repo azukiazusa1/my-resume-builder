@@ -33,7 +33,17 @@ const Edit = () => {
       <Title title={template.title} onChange={(value) => editTitle(id, value)} sx={{ mb: 4 }} />
       <Grid container spacing={2}>
         <Grid item xs={12} md={11} lg={preview ? 5 : 8}>
-          {matches ? !preview && <ResumeForm id={id} /> : <ResumeForm id={id} />}
+          {matches ? (
+            !preview && (
+              <div data-testid="resume-form">
+                <ResumeForm id={id} />
+              </div>
+            )
+          ) : (
+            <div data-testid="resume-form">
+              <ResumeForm id={id} />
+            </div>
+          )}
         </Grid>
         <Grid
           item
@@ -46,7 +56,11 @@ const Edit = () => {
             maxHeight: '90vh',
           }}
         >
-          {preview && <Viewer id={id} />}
+          {preview && (
+            <div data-testid="pdf-viewer">
+              <Viewer id={id} />
+            </div>
+          )}
         </Grid>
         <Grid
           item

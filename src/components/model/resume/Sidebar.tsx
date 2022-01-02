@@ -24,7 +24,7 @@ const Sidebar: React.VFC<Props> = ({ id, preview, onClickPreview }) => {
       }}
     >
       <Tooltip title="プレビュー" placement="right">
-        <Fab onClick={() => onClickPreview()} color="secondary">
+        <Fab onClick={() => onClickPreview()} color="secondary" data-testid="toggle-preview">
           {preview ? <VisibilityOffIcon /> : <VisibilityIcon />}
         </Fab>
       </Tooltip>
