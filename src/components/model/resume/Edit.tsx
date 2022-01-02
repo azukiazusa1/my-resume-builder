@@ -33,13 +33,7 @@ const Edit = () => {
       <Title title={template.title} onChange={(value) => editTitle(id, value)} sx={{ mb: 4 }} />
       <Grid container spacing={2}>
         <Grid item xs={12} md={11} lg={preview ? 5 : 8}>
-          {matches ? (
-            !preview && (
-              <div data-testid="resume-form">
-                <ResumeForm id={id} />
-              </div>
-            )
-          ) : (
+          {matches && preview ? null : (
             <div data-testid="resume-form">
               <ResumeForm id={id} />
             </div>
