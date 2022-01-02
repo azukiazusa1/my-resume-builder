@@ -1,10 +1,10 @@
 import { cloneDeep } from 'lodash-es'
-import { atom, selectorFamily, useRecoilValue,useSetRecoilState } from 'recoil'
+import { atom, selectorFamily, useRecoilCallback, useRecoilValue } from 'recoil'
 
 import localStorageEffect from '@/store/effects/localStorageEffect'
 
 import { RecoilAtomKeys, RecoilSelectorKeys } from '../RecoilKeys'
-import type { FieldValueActions,FieldValueSelectors, FieldValueState } from './types'
+import type { FieldValueActions, FieldValueSelectors, FieldValueState } from './types'
 
 
 const fieldValueState = atom<FieldValueState>({
@@ -29,15 +29,13 @@ export const fieldValueSelectors: FieldValueSelectors = {
 }
 
 export const fieldValueActions: FieldValueActions = {
-  useSetFieldValue: () => {
+  useSetFieldValue: () =>
 
-    const setState = useSetRecoilState(fieldValueState)
-    return (templateId: string, fieldId: string, value: unknown) => {
-      setState(prev => {
+    useRecoilCallback(({ set }) => (templateId: string, fieldId: string, value: unknown) => {
+      set(fieldValueState, prev => {
         const copy = cloneDeep(prev)
         copy[templateId] = { ...copy[templateId], [fieldId]: value }
         return copy
       })
-    }
-  },
+    })
 }

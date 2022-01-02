@@ -1,5 +1,5 @@
 import { cloneDeep } from 'lodash-es'
-import { atom, selector, selectorFamily, useRecoilValue, useSetRecoilState } from 'recoil'
+import { atom, selector, selectorFamily, useRecoilCallback, useRecoilValue } from 'recoil'
 
 import localStorageEffect from '@/store/effects/localStorageEffect'
 
@@ -45,10 +45,10 @@ const initialTemplates = (): TemplateState => [
       },
       {
         fieldId: 'address',
-        label: '住所',
+        label: '現住所',
         order: 5,
         block: 12,
-        type: 'shortTextWithRuby'
+        type: 'address'
       },
       {
         fieldId: 'tel',
@@ -180,11 +180,9 @@ const templateState = atom<TemplateState>({
 })
 
 export const templateActions: TemplateActions = {
-  useAddField: () => {
-
-    const setState = useSetRecoilState(templateState)
-    return (id: string, field: Field) => {
-      setState(prev => {
+  useAddField: () =>
+    useRecoilCallback(({ set }) => (id: string, field: Field) => {
+      set(templateState, prev => {
         const index = prev.findIndex(v => v.id === id)
         if (index === -1) {
           throw new Error('not found template id: ' + id)
@@ -195,12 +193,10 @@ export const templateActions: TemplateActions = {
 
         return replaceItemAtIndex(prev, index, copy)
       })
-    }
-  },
-  useRemoveField: () => {
-    const setState = useSetRecoilState(templateState)
-    return (id: string, fieldId: string) => {
-      setState(prev => {
+    }),
+  useRemoveField: () =>
+    useRecoilCallback(({ set }) => (id: string, fieldId: string) => {
+      set(templateState, prev => {
         const index = prev.findIndex(v => v.id === id)
         if (index === -1) {
           throw new Error('not found template id: ' + id)
@@ -210,14 +206,11 @@ export const templateActions: TemplateActions = {
         copy.fields = copy.fields.filter(v => v.fieldId !== fieldId)
 
         return replaceItemAtIndex(prev, index, copy)
-
       })
-    }
-  },
-  useEditTitle: () => {
-    const setState = useSetRecoilState(templateState)
-    return (id: string, title: string) => {
-      setState(prev => {
+    }),
+  useEditTitle: () =>
+    useRecoilCallback(({ set }) => (id: string, title: string) => {
+      set(templateState, prev => {
         const index = prev.findIndex(v => v.id === id)
         if (index === -1) {
           throw new Error('not found template id: ' + id)
@@ -228,8 +221,7 @@ export const templateActions: TemplateActions = {
 
         return replaceItemAtIndex(prev, index, copy)
       })
-    }
-  }
+    }),
 }
 
 /**

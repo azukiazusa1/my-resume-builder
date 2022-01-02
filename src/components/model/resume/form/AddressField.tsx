@@ -75,7 +75,7 @@ const AddressField: React.VFC<FieldProps<AddressFieldValue>> = ({ label, value, 
       <Grid item xs={12} alignItems="center">
         〒
         <TextField
-          sx={{ '& input': { paddingTop: '4px', paddingBottom: '4px' }, mx: 1, width: 50 }}
+          sx={{ '& input': { paddingTop: '4px', paddingBottom: '4px' }, mx: 1, width: 60 }}
           InputLabelProps={{ sx: { fontSize: '0.75rem' } }}
           value={value?.postCodeFirst}
           onChange={handleChange}
@@ -125,7 +125,7 @@ const AddressField: React.VFC<FieldProps<AddressFieldValue>> = ({ label, value, 
           inputProps={{ 'data-testid': 'ruby', name: 'ruby' }}
         />
       </Grid>
-      <Grid item xs={12} md={2}>
+      <Grid item xs={12} md={3}>
         <Autocomplete
           value={prefectureOptions.find((option) => option.value === value?.prefecture)}
           data-testid="autocomplete"
@@ -143,7 +143,7 @@ const AddressField: React.VFC<FieldProps<AddressFieldValue>> = ({ label, value, 
           )}
         />
       </Grid>
-      <Grid item xs={12} md={10}>
+      <Grid item xs={12} md={9}>
         <TextField
           value={value?.address}
           onChange={handleChange}

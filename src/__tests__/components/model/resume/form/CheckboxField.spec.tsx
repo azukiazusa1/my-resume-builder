@@ -25,7 +25,7 @@ describe('components/model/resume/form/CheckboxField', () => {
   test('propsで渡したvalueが設定される', () => {
     const { container } = render(<CheckboxField {...props} value={true} />);
     const input = container.querySelector('input');
-    expect(input!).toBeChecked();
+    expect(input?.value).toBe('true');
   });
 
   test('フォームに入力した時onChangeが呼ばれる - 初期値がtrue', () => {

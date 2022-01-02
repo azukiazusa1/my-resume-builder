@@ -6,14 +6,14 @@ import { FieldProps } from './Form';
 
 const CheckboxField: React.FC<FieldProps<boolean>> = ({ label, value, onChange }) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(event.target.checked);
+    onChange(value ? false : true);
   };
 
   return (
     <FormControlLabel
       control={
         <Checkbox
-          checked={value}
+          value={value}
           onChange={handleChange}
           inputProps={{
             'aria-label': label,

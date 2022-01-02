@@ -1,6 +1,6 @@
-import { act,renderRecoilHook } from 'react-recoil-hooks-testing-library';
+import { act, renderRecoilHook } from 'react-recoil-hooks-testing-library';
 
-import { fieldValueActions,fieldValueSelectors } from '@/store/filedValueState';
+import { fieldValueActions, fieldValueSelectors } from '@/store/filedValueState';
 
 const { useFieldValueItem } = fieldValueSelectors
 const { useSetFieldValue } = fieldValueActions
