@@ -57,6 +57,17 @@ export type TableFieldValue = GridRowsProp
 
 export type Field = ShortTextField | ShortTextWithRubyField | LongTextField | ImageField | NumberField | CheckboxField | AddressField | DateField | ListField | TableField
 
+export type FieldWithValue = Field & {
+  value?: Field['type'] extends 'shortText' | 'longText' | 'image' | 'date' ? string
+  : Field['type'] extends 'number' ? number
+  : Field['type'] extends 'checkbox' ? boolean
+  : Field['type'] extends 'list' ? string[]
+  : Field['type'] extends 'shortTextWithRuby' ? ShortTextWithRubyValue
+  : Field['type'] extends 'address' ? AddressFieldValue
+  : Field['type'] extends 'table' ? TableFieldValue
+  : any
+}
+
 export type TemplateState = Template[];
 
 export type TemplateActions = {
