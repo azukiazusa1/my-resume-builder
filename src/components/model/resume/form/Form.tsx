@@ -4,10 +4,12 @@ import CardContent from '@mui/material/CardContent';
 import Grid from '@mui/material/Grid';
 import React from 'react';
 
-import { fieldValueActions,fieldValueSelectors } from '@/store/filedValueState';
-import {templateSelectors } from '@/store/templateState';
+import { fieldValueActions, fieldValueSelectors } from '@/store/filedValueState';
+import { templateSelectors } from '@/store/templateState';
 import { Field } from '@/store/templateState/types';
 
+import AddressField from './AddressField';
+import CheckboxField from './CheckboxField';
 import DateField from './DateField';
 import ImageField from './ImageField';
 import ListField from './ListField';
@@ -48,6 +50,10 @@ function componentMapping(field: Field, value: any, onChange: (value: any) => vo
       return <LongTextField label={field.label} value={value} onChange={onChange} />;
     case 'image':
       return <ImageField label={field.label} value={value} onChange={onChange} />;
+    case 'checkbox':
+      return <CheckboxField label={field.label} value={value} onChange={onChange} />;
+    case 'address':
+      return <AddressField label={field.label} value={value} onChange={onChange} />;
     case 'number':
       return (
         <NumberField
