@@ -1,7 +1,9 @@
-import { Document, Font, Page, StyleSheet, Text, View } from '@react-pdf/renderer';
+import { Document, Font, Page, StyleSheet, View } from '@react-pdf/renderer';
 import React from 'react';
 
 import { FieldWithValue } from '@/store/templateState/types';
+
+import ShortTextWithRuby from './ShortTextWithRuby';
 
 Font.register({
   family: 'Nasu-Regular',
@@ -16,14 +18,72 @@ Font.register({
 const styles = StyleSheet.create({
   page: {
     fontFamily: 'Nasu-Regular',
+    display: 'flex',
+    flexWrap: 'wrap',
     flexDirection: 'row',
     backgroundColor: '#FFF',
-    width: '100%',
+    padding: '10px',
+    fontSize: '16px',
   },
-  section: {
-    margin: 10,
-    padding: 10,
-    flexGrow: 1,
+  'col-1': {
+    flex: '0 0 auto',
+    flexBasis: '8.3333333333%',
+    width: '8.3333333333%',
+  },
+  'col-2': {
+    flex: '0 0 auto',
+    flexBasis: '16.6666666667%',
+    width: '16.6666666667%',
+  },
+  'col-3': {
+    flex: '0 0 auto',
+    flexBasis: '25%',
+    width: '25%',
+  },
+  'col-4': {
+    flex: '0 0 auto',
+    flexBasis: '33.3333333333%',
+    width: '33.3333333333%',
+  },
+  'col-5': {
+    flex: '0 0 auto',
+    flexBasis: '41.6666666667%',
+    width: '41.6666666667%',
+  },
+  'col-6': {
+    flex: '0 0 auto',
+    flexBasis: '50%',
+    width: '50%',
+  },
+  'col-7': {
+    flex: '0 0 auto',
+    flexBasis: '58.3333333333%',
+    width: '58.3333333333%',
+  },
+  'col-8': {
+    flex: '0 0 auto',
+    flexBasis: '66.6666666667%',
+    width: '66.6666666667%',
+  },
+  'col-9': {
+    flex: '0 0 auto',
+    flexBasis: '75%',
+    width: '75%',
+  },
+  'col-10': {
+    flex: '0 0 auto',
+    flexBasis: '83.3333333333%',
+    width: '83.3333333333%',
+  },
+  'col-11': {
+    flex: '0 0 auto',
+    flexBasis: '91.6666666667%',
+    width: '91.6666666667%',
+  },
+  'col-12': {
+    flex: '0 0 auto',
+    flexBasis: '100%',
+    width: '100%',
   },
 });
 
@@ -31,19 +91,25 @@ type Props = {
   fieldWithValues: FieldWithValue[];
 };
 
+const FieldWithValueToPdf = (fieldWithValue: FieldWithValue) => {
+  switch (fieldWithValue.type) {
+    case 'shortTextWithRuby':
+      return <ShortTextWithRuby label={fieldWithValue.label} value={fieldWithValue.value} />;
+    default:
+      return null;
+  }
+};
+
 // Create Document Component
 const MyDocument: React.VFC<Props> = ({ fieldWithValues }) => {
-  console.log(fieldWithValues[0]);
   return (
     <Document>
-      <Page size="A4" style={styles.page} wrap={false}>
-        <View style={styles.section}>
-          <Text>{fieldWithValues[0]?.label}</Text>
-          <Text>{fieldWithValues[0]?.value?.ruby}</Text>
-        </View>
-        <View style={styles.section}>
-          <Text>Section #2</Text>
-        </View>
+      <Page size="A4" style={styles.page}>
+        {fieldWithValues.map((fieldWithValue) => (
+          <View key={fieldWithValue.fieldId} style={{ ...styles[`col-${fieldWithValue.block}`] }}>
+            {FieldWithValueToPdf(fieldWithValue)}
+          </View>
+        ))}
       </Page>
     </Document>
   );

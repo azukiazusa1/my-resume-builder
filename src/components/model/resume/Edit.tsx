@@ -15,7 +15,7 @@ const Edit = () => {
   const router = useRouter();
   const id = router.query.id as string;
   const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.down('md'));
+  const matches = useMediaQuery(theme.breakpoints.down('lg'));
 
   const [preview, setPreview] = useState(false);
 
@@ -48,6 +48,9 @@ const Edit = () => {
             position: 'sticky',
             top: 0,
             maxHeight: '90vh',
+            '& iframe': {
+              height: '90vh',
+            },
           }}
         >
           {preview && (
