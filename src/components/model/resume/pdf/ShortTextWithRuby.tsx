@@ -3,8 +3,8 @@ import React from 'react';
 
 import { ShortTextWithRubyValue } from '@/store/templateState/types';
 
-import Cell from './Cell';
-import Label from './Label';
+import Cell from './atoms/Cell';
+import Label from './atoms/Label';
 
 type Props = {
   label: string;

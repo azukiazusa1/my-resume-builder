@@ -1,7 +1,7 @@
 import { Text, View } from '@react-pdf/renderer';
 import React from 'react';
 
-import Cell from './Cell';
+import Cell from './atoms/Cell';
 
 type Props = {
   label: string;

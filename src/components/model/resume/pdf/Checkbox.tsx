@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View } from '@react-pdf/renderer';
 import React from 'react';
 
-import Cell from './Cell';
-import Label from './Label';
+import Cell from './atoms/Cell';
+import Label from './atoms/Label';
 
 const styles = StyleSheet.create({
   circle: {
