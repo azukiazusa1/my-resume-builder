@@ -24,7 +24,7 @@ const ShortTextWithRuby: React.VFC<Props> = ({ label, value }) => {
         }}
       >
         <Label>ふりがな</Label>
-        <Text style={{ fontSize: 12 }}>{value.ruby}</Text>
+        <Text style={{ fontSize: 10 }}>{value.ruby}</Text>
       </View>
 
       <View style={{ height: 40, display: 'flex', flexDirection: 'row', alignItems: 'center' }}>

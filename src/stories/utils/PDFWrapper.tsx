@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: '#FFF',
     padding: '10px',
-    fontSize: '16px',
+    fontSize: '14px',
   },
   'col-12': {
     flex: '0 0 auto',
