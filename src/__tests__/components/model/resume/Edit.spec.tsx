@@ -1,4 +1,5 @@
 import '@testing-library/jest-dom/extend-expect';
+import '@/__tests__/utils/mockingReadtPdf';
 
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { fireEvent, render } from '@testing-library/react';
@@ -16,11 +17,6 @@ jest.mock('next/router', () => ({
     };
   },
 }));
-
-jest.mock('@react-pdf/renderer', () => ({
-  PDFViewer: () => <div>PDFViewer</div>,
-}));
-jest.mock('@/components/model/resume/pdf/Document', () => <div>Document</div>);
 
 jest.mock('@mui/material/useMediaQuery');
 const mockUseMediaQuery = useMediaQuery as jest.Mock;
