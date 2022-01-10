@@ -15,7 +15,7 @@ type Props = {
 const OpenPreviewButton: React.VFC<Props> = ({ id }) => {
   const fieldWithValues = usePDFValue(id);
 
-  const handleClieck = (url: string | null) => {
+  const handleClick = (url: string | null) => {
     if (url) {
       window.open(url);
     }
