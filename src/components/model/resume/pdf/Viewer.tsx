@@ -25,7 +25,7 @@ const Edit: React.VFC<Props> = ({ id }) => {
   });
 
   return (
-    <PDFViewer style={{ width: '100%' }}>
+    <PDFViewer style={{ width: '100%' }} showToolbar={false}>
       <DebounceDocument fieldWithValues={filedWithValues} />
     </PDFViewer>
   );
