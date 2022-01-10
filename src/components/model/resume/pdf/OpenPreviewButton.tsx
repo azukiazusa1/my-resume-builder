@@ -15,11 +15,17 @@ type Props = {
 const OpenPreviewButton: React.VFC<Props> = ({ id }) => {
   const fieldWithValues = usePDFValue(id);
 
+  const handleClieck = (url: string | null) => {
+    if (url) {
+      window.open(url);
+    }
+  };
+
   return (
     <BlobProvider document={<DebounceDocument fieldWithValues={fieldWithValues} />}>
       {({ url }) => {
         return (
-          <Fab color="secondary" onClick={() => window.open(url)}>
+          <Fab color="secondary" onClick={() => handleClick(url)}>
             <LaunchIcon />
           </Fab>
         );
