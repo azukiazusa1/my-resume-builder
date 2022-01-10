@@ -9,7 +9,7 @@ import Th from './atoms/Th';
 
 type Props = {
   label: string;
-  value: TableFieldValue;
+  value?: TableFieldValue;
   options: TableFieldOptions;
 };
 
@@ -25,16 +25,16 @@ const TableHead: React.VFC<{ columns: TableFieldOptions['columns'] }> = ({ colum
   );
 };
 
-const TableBody: React.VFC<{ columns: TableFieldOptions['columns']; value: TableFieldValue }> = ({
+const TableBody: React.VFC<{ columns: TableFieldOptions['columns']; value?: TableFieldValue }> = ({
   columns,
   value,
 }) => {
   return (
     <>
-      {value.map((row) => (
+      {value?.map((row) => (
         <View key={row.id} style={{ display: 'flex', flexDirection: 'row' }}>
           {Object.entries(row).map(([k, v]) => {
-            if (k === 'id') return null;
+            if (k === 'id' || !v) return null;
 
             const option = columns.find((column) => column.field === k);
             if (!option) return null;

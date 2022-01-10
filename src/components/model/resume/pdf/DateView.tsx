@@ -7,7 +7,7 @@ import Label from './atoms/Label';
 
 type Props = {
   label: string;
-  value: string;
+  value?: string;
 };
 
 const DateView: React.VFC<Props> = ({ label, value }) => {
@@ -18,7 +18,7 @@ const DateView: React.VFC<Props> = ({ label, value }) => {
     <Cell>
       <View style={{ height: 40, display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
         <Label>{label}</Label>
-        <Text>{format(value)}</Text>
+        <Text>{value ? format(value) : ''}</Text>
       </View>
     </Cell>
   );

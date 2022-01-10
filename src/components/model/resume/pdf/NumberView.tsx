@@ -8,7 +8,7 @@ import Label from './atoms/Label';
 
 type Props = {
   label: string;
-  value: number;
+  value?: number;
   options: NumberFieldOptions;
 };
 

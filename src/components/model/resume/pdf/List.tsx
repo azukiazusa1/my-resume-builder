@@ -6,7 +6,7 @@ import Label from './atoms/Label';
 
 type Props = {
   label: string;
-  value: string[];
+  value?: string[];
 };
 
 const List: React.VFC<Props> = ({ label, value }) => {
@@ -15,7 +15,7 @@ const List: React.VFC<Props> = ({ label, value }) => {
       <View style={{ height: 20, display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
         <Label>{label}</Label>
       </View>
-      {value.map((v, i) => (
+      {value?.map((v, i) => (
         <View
           key={i}
           style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: 4 }}

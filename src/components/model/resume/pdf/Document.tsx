@@ -3,7 +3,16 @@ import React from 'react';
 
 import { FieldWithValue } from '@/store/templateState/types';
 
+import Address from './Address';
+import Checkbox from './Checkbox';
+import DateView from './DateView';
+import ImageView from './ImageView';
+import List from './List';
+import LongText from './LongText';
+import NumberView from './NumberView';
+import ShortText from './ShortText';
 import ShortTextWithRuby from './ShortTextWithRuby';
+import Table from './Table';
 
 Font.register({
   family: 'Nasu-Regular',
@@ -19,6 +28,7 @@ const styles = StyleSheet.create({
   page: {
     fontFamily: 'Nasu-Regular',
     display: 'flex',
+    alignItems: 'flex-end',
     flexWrap: 'wrap',
     flexDirection: 'row',
     backgroundColor: '#FFF',
@@ -91,12 +101,40 @@ type Props = {
   fieldWithValues: FieldWithValue[];
 };
 
-const FieldWithValueToPdf = (fieldWithValue: FieldWithValue) => {
+const FieldWithValueToPdf = (fieldWithValue: FieldWithValue): JSX.Element => {
   switch (fieldWithValue.type) {
+    case 'shortText':
+      return <ShortText label={fieldWithValue.label} value={fieldWithValue.value} />;
     case 'shortTextWithRuby':
       return <ShortTextWithRuby label={fieldWithValue.label} value={fieldWithValue.value} />;
-    default:
-      return null;
+    case 'longText':
+      return <LongText label={fieldWithValue.label} value={fieldWithValue.value} />;
+    case 'table':
+      return (
+        <Table
+          label={fieldWithValue.label}
+          value={fieldWithValue.value}
+          options={fieldWithValue.options!}
+        />
+      );
+    case 'address':
+      return <Address label={fieldWithValue.label} value={fieldWithValue.value} />;
+    case 'date':
+      return <DateView label={fieldWithValue.label} value={fieldWithValue.value} />;
+    case 'number':
+      return (
+        <NumberView
+          label={fieldWithValue.label}
+          value={fieldWithValue.value}
+          options={fieldWithValue.options!}
+        />
+      );
+    case 'checkbox':
+      return <Checkbox label={fieldWithValue.label} value={fieldWithValue.value} />;
+    case 'list':
+      return <List label={fieldWithValue.label} value={fieldWithValue.value} />;
+    case 'image':
+      return <ImageView label={fieldWithValue.label} value={fieldWithValue.value} />;
   }
 };
 

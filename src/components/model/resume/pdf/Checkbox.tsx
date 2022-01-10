@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
 });
 type Props = {
   label: string;
-  value: boolean;
+  value?: boolean;
 };
 
 const Checkbox: React.VFC<Props> = ({ label, value }) => {

@@ -8,7 +8,7 @@ import Label from './atoms/Label';
 
 type Props = {
   label: string;
-  value: ShortTextWithRubyValue;
+  value?: ShortTextWithRubyValue;
 };
 
 const ShortTextWithRuby: React.VFC<Props> = ({ label, value }) => {
@@ -24,12 +24,12 @@ const ShortTextWithRuby: React.VFC<Props> = ({ label, value }) => {
         }}
       >
         <Label>ふりがな</Label>
-        <Text style={{ fontSize: 10 }}>{value.ruby}</Text>
+        <Text style={{ fontSize: 10 }}>{value?.ruby}</Text>
       </View>
 
       <View style={{ height: 40, display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
         <Label>{label}</Label>
-        <Text>{value.value}</Text>
+        <Text>{value?.value}</Text>
       </View>
     </Cell>
   );

@@ -8,7 +8,7 @@ import Label from './atoms/Label';
 
 type Props = {
   label: string;
-  value: AddressFieldValue;
+  value?: AddressFieldValue;
 };
 
 const ShortTextWithRuby: React.VFC<Props> = ({ label, value }) => {
@@ -24,15 +24,15 @@ const ShortTextWithRuby: React.VFC<Props> = ({ label, value }) => {
         }}
       >
         <Label>ふりがな</Label>
-        <Text style={{ fontSize: 10 }}>{value.ruby}</Text>
+        <Text style={{ fontSize: 10 }}>{value?.ruby}</Text>
       </View>
 
       <View style={{ height: 40, display: 'flex' }}>
         <Label>
-          {label} （〒{value.postCodeFirst} - {value.postCodeLast}）
+          {label} （〒{value?.postCodeFirst} - {value?.postCodeLast}）
         </Label>
         <Text style={{ marginLeft: 5 }}>
-          {value.prefecture} {value.address}
+          {value?.prefecture} {value?.address}
         </Text>
       </View>
     </Cell>

@@ -6,7 +6,7 @@ import Label from './atoms/Label';
 
 type Props = {
   label: string;
-  value: string;
+  value?: string;
 };
 
 const ShortText: React.VFC<Props> = ({ label, value }) => {

@@ -5,7 +5,7 @@ import Cell from './atoms/Cell';
 
 type Props = {
   label: string;
-  value: string;
+  value?: string;
 };
 
 const LongText: React.VFC<Props> = ({ label, value }) => {
