@@ -5,7 +5,7 @@ import React from 'react';
 import debounceRender from 'react-debounce-render';
 
 import Document from '@/components/model/resume/pdf/Document';
-import usePDFValue from '@/hooks/usePdfValue';
+import usePDFValue from '@/hooks/usePDFValue';
 
 const DebounceDocument = debounceRender(Document, 3000);
 
