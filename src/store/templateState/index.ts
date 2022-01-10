@@ -16,14 +16,14 @@ const initialTemplates = (): TemplateState => [
         fieldId: 'name',
         label: '名前',
         order: 1,
-        block: 10,
+        block: 8,
         type: 'shortTextWithRuby',
       },
       {
         fieldId: 'photo',
         label: '写真',
         order: 2,
-        block: 2,
+        block: 4,
         type: 'image'
       },
       {

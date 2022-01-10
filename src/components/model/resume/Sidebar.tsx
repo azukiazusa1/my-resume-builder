@@ -19,7 +19,7 @@ const Sidebar: React.VFC<Props> = ({ id, preview, onClickPreview }) => {
     <Box
       sx={{
         display: 'flex',
-        flexDirection: { xs: 'row', md: 'column' },
+        flexDirection: { xs: 'row', lg: 'column' },
         '& > :not(style)': { m: 1 },
       }}
     >

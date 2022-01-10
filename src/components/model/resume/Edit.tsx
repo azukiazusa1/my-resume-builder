@@ -15,7 +15,7 @@ const Edit = () => {
   const router = useRouter();
   const id = router.query.id as string;
   const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.down('md'));
+  const matches = useMediaQuery(theme.breakpoints.down('lg'));
 
   const [preview, setPreview] = useState(false);
 
@@ -32,7 +32,7 @@ const Edit = () => {
     <Container maxWidth="xl" sx={{ mt: 2 }}>
       <Title title={template.title} onChange={(value) => editTitle(id, value)} sx={{ mb: 4 }} />
       <Grid container spacing={2}>
-        <Grid item xs={12} md={11} lg={preview ? 5 : 8}>
+        <Grid item xs={12} lg={preview ? 5 : 8}>
           {matches && preview ? null : (
             <div data-testid="resume-form">
               <ResumeForm id={id} />
@@ -42,12 +42,14 @@ const Edit = () => {
         <Grid
           item
           xs={12}
-          md={preview ? 11 : 0}
           lg={preview ? 6 : 3}
           sx={{
             position: 'sticky',
             top: 0,
             maxHeight: '90vh',
+            '& iframe': {
+              height: '90vh',
+            },
           }}
         >
           {preview && (
@@ -59,15 +61,15 @@ const Edit = () => {
         <Grid
           item
           xs={12}
-          md={1}
+          lg={1}
           sx={{
-            top: { xs: 'auto', md: 0 },
-            right: { xs: 0, md: 'auto' },
-            bottom: { xs: 16, md: 'auto' },
-            maxHeight: { md: '90vh' },
+            top: { xs: 'auto', lg: 0 },
+            right: { xs: 0, lg: 'auto' },
+            bottom: { xs: 16, lg: 'auto' },
+            maxHeight: { lg: '90vh' },
             position: {
               xs: 'fixed',
-              md: 'sticky',
+              lg: 'sticky',
             },
           }}
         >
