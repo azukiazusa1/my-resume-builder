@@ -6,8 +6,9 @@ import Fab from '@mui/material/Fab';
 import Tooltip from '@mui/material/Tooltip';
 import React from 'react';
 
-import DownloadButton from '@/components/model/resume/pdf/DownloadButton';
-import OpenPreviewButton from '@/components/model/resume/pdf/OpenPreviewButton';
+import AddFieldDialog from '@/components/model/resume/sidebar/AddFieldDialog';
+import DownloadButton from '@/components/model/resume/sidebar/DownloadButton';
+import OpenPreviewButton from '@/components/model/resume/sidebar/OpenPreviewButton';
 
 type Props = {
   id: string;
@@ -35,11 +36,13 @@ const Sidebar: React.VFC<Props> = ({ id, preview, onClickPreview }) => {
       <Tooltip title="ダウンロード" placement="right">
         <DownloadButton id={id} />
       </Tooltip>
-      <Tooltip title="フィールドを追加" placement="right">
-        <Fab color="secondary">
-          <AddIcon />
-        </Fab>
-      </Tooltip>
+      <AddFieldDialog id={id}>
+        <Tooltip title="フィールドを追加" placement="right">
+          <Fab color="secondary">
+            <AddIcon />
+          </Fab>
+        </Tooltip>
+      </AddFieldDialog>
     </Box>
   );
 };
