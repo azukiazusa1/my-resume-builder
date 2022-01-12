@@ -6,7 +6,7 @@ import Fab from '@mui/material/Fab';
 import Tooltip from '@mui/material/Tooltip';
 import React from 'react';
 
-import AddFieldDialog from '@/components/model/resume/sidebar/AddFieldDialog';
+import AddFieldDialog from '@/components/model/resume/field/AddFieldDialog';
 import DownloadButton from '@/components/model/resume/sidebar/DownloadButton';
 import OpenPreviewButton from '@/components/model/resume/sidebar/OpenPreviewButton';
 
