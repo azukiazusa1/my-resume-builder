@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
-import Sidebar from '@/components/model/resume/Sidebar';
+import Sidebar from '@/components/model/resume/sidebar/Sidebar';
 
 export default {
   sidebar: 'model/resume/Sidebar',
