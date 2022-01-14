@@ -27,7 +27,12 @@ export type ShortTextWithRubyValue = { ruby: string, value: string }
 
 type LongTextField = BaseField<'longText'>
 
-type ImageField = BaseField<'image'>
+export type ImageFieldOptions = {
+  width: number;
+  height: number;
+}
+
+type ImageField = BaseField<'image', ImageFieldOptions>
 
 export type NumberFieldOptions = { unit: string }
 

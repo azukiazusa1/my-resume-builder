@@ -19,7 +19,6 @@ const NumberFieldOptionsForm: React.VFC<Props> = ({ control, errors }) => {
           {...field}
           id="unit"
           label="単位"
-          fullWidth
           variant="standard"
           required
           error={Boolean(errors.options?.unit)}
