@@ -138,7 +138,7 @@ const FieldWithValueToPdf = (fieldWithValue: FieldWithValue): JSX.Element => {
         <ImageView
           label={fieldWithValue.label}
           value={fieldWithValue.value}
-          options={fieldWithValue.options}
+          options={fieldWithValue.options!}
         />
       );
   }

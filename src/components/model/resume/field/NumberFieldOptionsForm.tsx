@@ -20,7 +20,6 @@ const NumberFieldOptionsForm: React.VFC<Props> = ({ control, errors }) => {
           id="unit"
           label="単位"
           variant="standard"
-          required
           error={Boolean(errors.options?.unit)}
           helperText={errors.options?.unit?.message}
         />
