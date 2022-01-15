@@ -72,7 +72,12 @@ const ImageField: React.VFC<FieldProps<string, ImageFieldOptions>> = ({
       >
         <input data-testid="drop-input" {...getInputProps()} />
         {file || value ? (
-          <Image src={file || value || ''} alt={label} width={128} height={160} />
+          <Image
+            src={file || value || ''}
+            alt={label}
+            width={options?.width}
+            height={options?.height}
+          />
         ) : (
           <>
             <Box sx={{ textAlign: 'center', width: '100%' }}>
