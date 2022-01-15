@@ -3,9 +3,10 @@ import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import React from 'react';
 
-import { FieldProps } from '../../../../../components/model/resume/form/Form';
-import ImageField from '../../../../../components/model/resume/form/ImageField';
-import { server } from '../../../../../mokcs/server';
+import { FieldProps } from '@/components/model/resume/form/Form';
+import ImageField from '@/components/model/resume/form/ImageField';
+import { server } from '@/mokcs/server';
+import { ImageFieldOptions } from '@/store/templateState/types';
 
 const dropFile = (inputEl: HTMLElement) => {
   window.URL.createObjectURL = jest.fn().mockImplementation(() => 'url');
@@ -23,13 +24,17 @@ const dropFile = (inputEl: HTMLElement) => {
 };
 
 describe('ImageField component', () => {
-  let props: FieldProps<string>;
+  let props: FieldProps<string, ImageFieldOptions>;
 
   beforeEach(() => {
     props = {
       label: 'test-label',
       value: '',
       onChange: jest.fn(),
+      options: {
+        width: 120,
+        height: 150,
+      },
     };
   });
 

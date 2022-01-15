@@ -1,16 +1,21 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
+import { RecoilRoot } from 'recoil';
 
-import Sidebar from '@/components/model/resume/Sidebar';
+import Sidebar from '@/components/model/resume/sidebar/Sidebar';
 
 export default {
-  sidebar: 'model/resume/Sidebar',
+  title: 'model/resume/sidebar/Sidebar',
   component: Sidebar,
 } as ComponentMeta<typeof Sidebar>;
 
 const Template: ComponentStory<typeof Sidebar> = (args) => {
   const [preview, setPreview] = React.useState(false);
-  return <Sidebar id="id" preview={preview} onClickPreview={() => setPreview((prev) => !prev)} />;
+  return (
+    <RecoilRoot>
+      <Sidebar id="resume" preview={preview} onClickPreview={() => setPreview((prev) => !prev)} />
+    </RecoilRoot>
+  );
 };
 
 export const Default = Template.bind({});

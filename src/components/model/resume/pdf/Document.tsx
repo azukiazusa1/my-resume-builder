@@ -134,7 +134,13 @@ const FieldWithValueToPdf = (fieldWithValue: FieldWithValue): JSX.Element => {
     case 'list':
       return <List label={fieldWithValue.label} value={fieldWithValue.value} />;
     case 'image':
-      return <ImageView label={fieldWithValue.label} value={fieldWithValue.value} />;
+      return (
+        <ImageView
+          label={fieldWithValue.label}
+          value={fieldWithValue.value}
+          options={fieldWithValue.options!}
+        />
+      );
   }
 };
 

@@ -1,5 +1,6 @@
 import LaunchIcon from '@mui/icons-material/Launch';
 import Fab from '@mui/material/Fab';
+import Tooltip from '@mui/material/Tooltip';
 import { BlobProvider } from '@react-pdf/renderer';
 import React from 'react';
 import debounceRender from 'react-debounce-render';
@@ -25,9 +26,11 @@ const OpenPreviewButton: React.VFC<Props> = ({ id }) => {
     <BlobProvider document={<DebounceDocument fieldWithValues={fieldWithValues} />}>
       {({ url }) => {
         return (
-          <Fab color="secondary" onClick={() => handleClick(url)}>
-            <LaunchIcon />
-          </Fab>
+          <Tooltip title="別タブで表示" placement="right">
+            <Fab color="secondary" onClick={() => handleClick(url)}>
+              <LaunchIcon />
+            </Fab>
+          </Tooltip>
         );
       }}
     </BlobProvider>

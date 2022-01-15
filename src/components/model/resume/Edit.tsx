@@ -7,7 +7,7 @@ import React, { useState } from 'react';
 
 import ResumeForm from '@/components/model/resume/form/Form';
 import Viewer from '@/components/model/resume/pdf/Viewer';
-import Sidebar from '@/components/model/resume/Sidebar';
+import Sidebar from '@/components/model/resume/sidebar/Sidebar';
 import Title from '@/components/model/resume/Title';
 import { templateActions, templateSelectors } from '@/store/templateState';
 

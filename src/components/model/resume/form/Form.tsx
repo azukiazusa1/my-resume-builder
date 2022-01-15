@@ -49,7 +49,9 @@ function componentMapping(field: Field, value: any, onChange: (value: any) => vo
     case 'longText':
       return <LongTextField label={field.label} value={value} onChange={onChange} />;
     case 'image':
-      return <ImageField label={field.label} value={value} onChange={onChange} />;
+      return (
+        <ImageField label={field.label} value={value} onChange={onChange} options={field.options} />
+      );
     case 'checkbox':
       return <CheckboxField label={field.label} value={value} onChange={onChange} />;
     case 'address':

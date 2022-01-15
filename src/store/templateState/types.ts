@@ -27,7 +27,12 @@ export type ShortTextWithRubyValue = { ruby: string, value: string }
 
 type LongTextField = BaseField<'longText'>
 
-type ImageField = BaseField<'image'>
+export type ImageFieldOptions = {
+  width: number;
+  height: number;
+}
+
+type ImageField = BaseField<'image', ImageFieldOptions>
 
 export type NumberFieldOptions = { unit: string }
 
@@ -57,6 +62,19 @@ export type TableFieldValue = GridRowsProp
 
 export type Field = ShortTextField | ShortTextWithRubyField | LongTextField | ImageField | NumberField | CheckboxField | AddressField | DateField | ListField | TableField
 
+export const fieldTypes = [
+  { type: 'shortText', label: 'テキスト' },
+  { type: 'shortTextWithRuby', label: 'ふりがな付きテキスト' },
+  { type: 'longText', label: 'テキスト（複数行）' },
+  { type: 'image', label: '画像' },
+  { type: 'number', label: '数値' },
+  { type: 'checkbox', label: 'チェックボックス' },
+  { type: 'address', label: '住所' },
+  { type: 'date', label: '日付' },
+  { type: 'list', label: 'リスト' },
+  { type: 'table', label: 'テーブル' },
+] as const
+
 export type FieldWithValue = Field & {
   value?: Field['type'] extends 'shortText' | 'longText' | 'image' | 'date' ? string
   : Field['type'] extends 'number' ? number
@@ -71,7 +89,7 @@ export type FieldWithValue = Field & {
 export type TemplateState = Template[];
 
 export type TemplateActions = {
-  useAddField: () => (id: string, field: Field) => void;
+  useAddField: () => (id: string, field: Omit<Field, 'order'>) => void;
   useRemoveField: () => (id: string, fieldId: string) => void;
   useEditTitle: () => (id: string, title: string) => void;
 }

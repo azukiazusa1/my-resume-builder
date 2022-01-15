@@ -24,7 +24,11 @@ const initialTemplates = (): TemplateState => [
         label: '写真',
         order: 2,
         block: 4,
-        type: 'image'
+        type: 'image',
+        options: {
+          width: 120,
+          height: 150
+        }
       },
       {
         fieldId: 'birthday',
@@ -181,7 +185,7 @@ const templateState = atom<TemplateState>({
 
 export const templateActions: TemplateActions = {
   useAddField: () =>
-    useRecoilCallback(({ set }) => (id: string, field: Field) => {
+    useRecoilCallback(({ set }) => (id: string, field: Omit<Field, 'order'>) => {
       set(templateState, prev => {
         const index = prev.findIndex(v => v.id === id)
         if (index === -1) {
@@ -189,7 +193,7 @@ export const templateActions: TemplateActions = {
         }
 
         const copy = cloneDeep(prev[index])
-        copy.fields = [...copy.fields, field]
+        copy.fields = [...copy.fields, { order: copy.fields.length + 1, ...field } as Field]
 
         return replaceItemAtIndex(prev, index, copy)
       })

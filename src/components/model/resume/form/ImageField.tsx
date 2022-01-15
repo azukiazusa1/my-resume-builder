@@ -1,14 +1,21 @@
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Image from 'next/image';
-import React, { useCallback,useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 
-import httpClient from '../../../../lib/httpClient';
-import theme from '../../../../lib/theme';
+import httpClient from '@/lib/httpClient';
+import theme from '@/lib/theme';
+import { ImageFieldOptions } from '@/store/templateState/types';
+
 import { FieldProps } from './Form';
 
-const ImageField: React.FC<FieldProps<string>> = ({ label, value, onChange }) => {
+const ImageField: React.VFC<FieldProps<string, ImageFieldOptions>> = ({
+  label,
+  value,
+  onChange,
+  options,
+}) => {
   const [file, setFile] = useState<string | null>(null);
   const [error, setError] = useState(false);
 
@@ -53,8 +60,8 @@ const ImageField: React.FC<FieldProps<string>> = ({ label, value, onChange }) =>
         {...getRootProps()}
         sx={{
           backgroundColor: '#e0e0e0',
-          width: '8rem',
-          height: '10rem',
+          width: options?.width,
+          height: options?.height,
           display: 'flex',
           alignItems: 'center',
           justifyItems: 'center',
@@ -65,7 +72,12 @@ const ImageField: React.FC<FieldProps<string>> = ({ label, value, onChange }) =>
       >
         <input data-testid="drop-input" {...getInputProps()} />
         {file || value ? (
-          <Image src={file || value || ''} alt={label} width={128} height={160} />
+          <Image
+            src={file || value || ''}
+            alt={label}
+            width={options?.width}
+            height={options?.height}
+          />
         ) : (
           <>
             <Box sx={{ textAlign: 'center', width: '100%' }}>
