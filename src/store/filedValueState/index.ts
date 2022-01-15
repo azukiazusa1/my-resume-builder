@@ -16,16 +16,52 @@ const fieldValueState = atom<FieldValueState>({
 /**
  * テンプレートIDとフィールドのIDを指定して、フィールドの値を取得する
  */
-const fieldValueSelector = selectorFamily<Record<string, unknown>, string>({
+const fieldValueSelector = selectorFamily<string | undefined, { templateId: string, fieldId: string }>({
   key: RecoilSelectorKeys.FIELD_VALUE_ITEM,
-  get: (templateId) => ({ get }) => {
+  get: ({ templateId, fieldId }) => ({ get }) => {
     const fieldValue = get(fieldValueState)
-    return fieldValue[templateId] ?? {}
+    const templateField = fieldValue[templateId]
+    if (!templateField) {
+      return undefined
+    }
+    const v = templateField[fieldId]
+    // selector の値の同一性は値の比較(===)で判定するため
+    // selector が再計算されないように、JSON.stringifyして返す
+    return typeof v == 'undefined' ? v : JSON.stringify(v)
   }
 })
 
+/**
+ * テンプレートIDを指定して、テンプレートのフィールドの値一覧を取得する
+ */
+const templateValueSelector = selectorFamily<Record<string, unknown>, { templateId: string }>({
+  key: RecoilSelectorKeys.SELECTED_TEMPLATE_ITEM,
+  get: ({ templateId }) => ({ get }) => {
+    const fieldValue = get(fieldValueState)
+    return fieldValue[templateId]
+  }
+})
+
+
 export const fieldValueSelectors: FieldValueSelectors = {
-  useFieldValueItem: (templateId) => useRecoilValue(fieldValueSelector(templateId))
+  useFieldValueItem: <T = any>(templateId: string, fieldId: string): T | undefined => {
+    const recoilValue = useRecoilValue(fieldValueSelector({ templateId, fieldId }))
+    if (recoilValue === undefined) {
+      return undefined
+    }
+    try {
+      return JSON.parse(recoilValue) as T
+    } catch (e) {
+      return undefined
+    }
+  },
+  useTemplateValues: (templateId: string): Record<string, unknown> => {
+    const recoilValue = useRecoilValue(templateValueSelector({ templateId }))
+    if (recoilValue === undefined) {
+      return {}
+    }
+    return recoilValue
+  }
 }
 
 export const fieldValueActions: FieldValueActions = {

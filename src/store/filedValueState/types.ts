@@ -5,5 +5,8 @@ export type FieldValueActions = {
 }
 
 export type FieldValueSelectors = {
-  useFieldValueItem: (templateId: string) => Record<string, unknown>;
+  /** テンプレートIDとフィールドIDから特定のフィールドの値を取得する */
+  useFieldValueItem: <T = any>(templateId: string, fieldId: string) => T | undefined;
+  /** テンプレートIDから特定のテンプレートのフィールドの値の一覧を取得する */
+  useTemplateValues: (templateId: string) => Record<string, unknown>;
 }

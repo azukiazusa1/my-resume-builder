@@ -8,14 +8,14 @@ import { templateSelectors } from '@/store/templateState';
 
 const DebounceDocument = debounceRender(Document, 1500);
 const { useTemplateItem } = templateSelectors;
-const { useFieldValueItem } = fieldValueSelectors;
+const { useTemplateValues } = fieldValueSelectors;
 
 type Props = {
   id: string;
 };
 const Edit: React.VFC<Props> = ({ id }) => {
   const template = useTemplateItem(id);
-  const fieldValue = useFieldValueItem(id);
+  const fieldValue = useTemplateValues(id);
 
   const filedWithValues = template.fields.map((field) => {
     return {
