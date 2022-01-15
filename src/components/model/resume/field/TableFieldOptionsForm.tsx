@@ -11,8 +11,11 @@ import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { GridNativeColTypes } from '@mui/x-data-grid';
+import React from 'react';
 import { Control, Controller, useFieldArray } from 'react-hook-form';
-import { v4 as uuidv4 } from 'uuid';
+
+import { defaultColmunValue } from '@/components/model/resume/field/AddFieldDialog';
+import { transform } from '@/lib/form';
 
 type Props = {
   control: Control;
@@ -34,14 +37,6 @@ const TableFieldOptionsForm: React.VFC<Props> = ({ control, errors }) => {
     control,
   });
 
-  const defaultValue = {
-    field: uuidv4(),
-    width: 100,
-    headerName: '',
-    editable: true,
-    type: 'string',
-  };
-
   return (
     <Grid container spacing={2} sx={{ px: 2, my: 2 }}>
       <Typography variant="subtitle1">カラム設定</Typography>
@@ -52,8 +47,8 @@ const TableFieldOptionsForm: React.VFC<Props> = ({ control, errors }) => {
               name={`options.columns.${index}.headerName`}
               control={control}
               rules={{
-                required: 'カラム名を入力してください',
-                maxLength: { value: 20, message: '20文字以内で入力してください' },
+                required: 'カラム名を入力してください。',
+                maxLength: { value: 20, message: '20文字以内で入力してください。' },
               }}
               render={({ field }) => (
                 <TextField
@@ -64,7 +59,8 @@ const TableFieldOptionsForm: React.VFC<Props> = ({ control, errors }) => {
                   required
                   fullWidth
                   error={Boolean(errors.options?.columns?.[index]?.headerName)}
-                  helperText={errors.options?.columns?.[index]?.width?.headerName}
+                  helperText={errors.options?.columns?.[index]?.headerName?.message}
+                  inputProps={{ 'data-testid': 'field-headerName-input' }}
                 />
               )}
             />
@@ -81,8 +77,8 @@ const TableFieldOptionsForm: React.VFC<Props> = ({ control, errors }) => {
               name={`options.columns.${index}.width`}
               control={control}
               rules={{
-                required: '1以上の値を入力してください',
-                min: { value: 1, message: '1以上の値を入力してください' },
+                required: '1以上の値を入力してください。',
+                min: { value: 1, message: '1以上の値を入力してください。' },
               }}
               render={({ field }) => (
                 <TextField
@@ -94,6 +90,9 @@ const TableFieldOptionsForm: React.VFC<Props> = ({ control, errors }) => {
                   required
                   error={Boolean(errors.options?.columns?.[index]?.width)}
                   helperText={errors.options?.columns?.[index]?.width?.message}
+                  onChange={(e) => field.onChange(transform.output(e))}
+                  value={transform.input(field.value)}
+                  inputProps={{ 'data-testid': 'field-width-input' }}
                 />
               )}
             />
@@ -123,7 +122,7 @@ const TableFieldOptionsForm: React.VFC<Props> = ({ control, errors }) => {
           <Divider sx={{ width: '100%', my: 2 }} />
         </Grid>
       ))}
-      <Button variant="contained" onClick={() => append(defaultValue)}>
+      <Button variant="contained" onClick={() => append(defaultColmunValue())}>
         カラムを追加
       </Button>
     </Grid>

@@ -1,6 +1,7 @@
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import React from 'react';
 import { Control, Controller } from 'react-hook-form';
 
 import { transform } from '@/lib/form';
@@ -19,8 +20,8 @@ const ImageFieldOptionsForm: React.VFC<Props> = ({ control, errors }) => {
           name="options.width"
           control={control}
           rules={{
-            required: true,
-            min: { value: 1, message: '1以上の値を入力してください' },
+            required: '1以上の値を入力してください。',
+            min: { value: 1, message: '1以上の値を入力してください。' },
           }}
           render={({ field }) => (
             <TextField
@@ -34,6 +35,7 @@ const ImageFieldOptionsForm: React.VFC<Props> = ({ control, errors }) => {
               helperText={errors.options?.width?.message}
               onChange={(e) => field.onChange(transform.output(e))}
               value={transform.input(field.value)}
+              inputProps={{ 'data-testid': 'field-width-input' }}
             />
           )}
         />
@@ -43,20 +45,22 @@ const ImageFieldOptionsForm: React.VFC<Props> = ({ control, errors }) => {
           name="options.height"
           control={control}
           rules={{
-            required: true,
-            min: { value: 1, message: '1以上の値を入力してください' },
+            required: '1以上の値を入力してください。',
+            min: { value: 1, message: '1以上の値を入力してください。' },
           }}
           render={({ field }) => (
             <TextField
               {...field}
               id="height"
               label="高さ"
+              type="number"
               variant="standard"
               required
               error={Boolean(errors.options?.height)}
               helperText={errors.options?.height?.message}
               onChange={(e) => field.onChange(transform.output(e))}
               value={transform.input(field.value)}
+              inputProps={{ 'data-testid': 'field-height-input' }}
             />
           )}
         />

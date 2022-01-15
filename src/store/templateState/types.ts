@@ -89,7 +89,7 @@ export type FieldWithValue = Field & {
 export type TemplateState = Template[];
 
 export type TemplateActions = {
-  useAddField: () => (id: string, field: Field) => void;
+  useAddField: () => (id: string, field: Omit<Field, 'order'>) => void;
   useRemoveField: () => (id: string, fieldId: string) => void;
   useEditTitle: () => (id: string, title: string) => void;
 }

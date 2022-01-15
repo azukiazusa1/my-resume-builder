@@ -30,12 +30,8 @@ const Sidebar: React.VFC<Props> = ({ id, preview, onClickPreview }) => {
           {preview ? <VisibilityOffIcon /> : <VisibilityIcon />}
         </Fab>
       </Tooltip>
-      <Tooltip title="別タブで表示" placement="right">
-        <OpenPreviewButton id={id} />
-      </Tooltip>
-      <Tooltip title="ダウンロード" placement="right">
-        <DownloadButton id={id} />
-      </Tooltip>
+      <OpenPreviewButton id={id} />
+      <DownloadButton id={id} />
       <AddFieldDialog id={id}>
         <Tooltip title="フィールドを追加" placement="right">
           <Fab color="secondary">

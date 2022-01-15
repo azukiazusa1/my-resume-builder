@@ -1,6 +1,6 @@
 import TextField from '@mui/material/TextField';
+import React from 'react';
 import { Control, Controller } from 'react-hook-form';
-
 type Props = {
   control: Control;
   errors: { [x: string]: any };
@@ -12,7 +12,7 @@ const NumberFieldOptionsForm: React.VFC<Props> = ({ control, errors }) => {
       name="options.unit"
       control={control}
       rules={{
-        maxLength: { value: 5, message: '5文字以内で入力してください' },
+        maxLength: { value: 5, message: '5文字以内で入力してください。' },
       }}
       render={({ field }) => (
         <TextField
@@ -22,6 +22,7 @@ const NumberFieldOptionsForm: React.VFC<Props> = ({ control, errors }) => {
           variant="standard"
           error={Boolean(errors.options?.unit)}
           helperText={errors.options?.unit?.message}
+          inputProps={{ 'data-testid': 'field-unit-input' }}
         />
       )}
     />

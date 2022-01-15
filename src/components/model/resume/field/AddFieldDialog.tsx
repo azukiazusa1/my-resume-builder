@@ -83,6 +83,7 @@ const AddFieldDialog: React.FC<Props> = ({ id, children }) => {
   };
 
   const onSubmit = (data: any) => {
+    console.log(data);
     let options: any;
 
     if (data.type === 'table') {
@@ -93,18 +94,14 @@ const AddFieldDialog: React.FC<Props> = ({ id, children }) => {
       options = { unit: data.options.unit };
     }
 
-    console.log({ options });
-
     addField(id, {
       fieldId: uuidv4(),
       type: data.type,
       label: data.label,
-      type: data.type,
       options,
       block: 12,
     });
-
-    handleClose();
+    setOpen(false);
   };
   return (
     <>
@@ -120,7 +117,7 @@ const AddFieldDialog: React.FC<Props> = ({ id, children }) => {
                   control={control}
                   rules={{
                     required: 'フィールド名を入力してください。',
-                    maxLength: { value: 20, message: '20文字以内で入力してください' },
+                    maxLength: { value: 20, message: '20文字以内で入力してください。' },
                   }}
                   render={({ field }) => (
                     <TextField
@@ -132,6 +129,7 @@ const AddFieldDialog: React.FC<Props> = ({ id, children }) => {
                       required
                       error={Boolean(errors.label)}
                       helperText={errors.label && errors.label.message}
+                      inputProps={{ 'data-testid': 'field-name-input' }}
                     />
                   )}
                 />

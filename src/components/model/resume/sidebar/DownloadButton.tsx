@@ -1,5 +1,6 @@
 import DownloadIcon from '@mui/icons-material/Download';
 import Fab from '@mui/material/Fab';
+import Tooltip from '@mui/material/Tooltip';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import React from 'react';
 import debounceRender from 'react-debounce-render';
@@ -20,9 +21,11 @@ const DownloadButton: React.VFC<Props> = ({ id }) => {
       document={<DebounceDocument fieldWithValues={fieldWithValues} />}
       fileName="resume.pdf"
     >
-      <Fab color="secondary">
-        <DownloadIcon />
-      </Fab>
+      <Tooltip title="ダウンロード" placement="right">
+        <Fab color="secondary">
+          <DownloadIcon />
+        </Fab>
+      </Tooltip>
     </PDFDownloadLink>
   );
 };
