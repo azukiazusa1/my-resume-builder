@@ -14,7 +14,7 @@ const ShortTextField: React.VFC<FieldProps<string, ShortTextFieldOptions>> = ({
   onChange,
   options = { type: 'text' },
 }) => {
-  const value = useFieldValueItem(templateId, fieldId);
+  const value = useFieldValueItem<string>(templateId, fieldId);
   const handleChange = (event: React.FocusEvent<HTMLInputElement>) => {
     onChange(event.target.value);
   };

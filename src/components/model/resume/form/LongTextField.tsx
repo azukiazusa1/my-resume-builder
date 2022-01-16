@@ -8,7 +8,7 @@ import { FieldProps } from './Form';
 const { useFieldValueItem } = fieldValueSelectors;
 
 const ShortTextField: React.FC<FieldProps<string>> = ({ label, templateId, fieldId, onChange }) => {
-  const value = useFieldValueItem(templateId, fieldId);
+  const value = useFieldValueItem<string>(templateId, fieldId);
   const handleChange = (event: React.FocusEvent<HTMLInputElement>) => {
     onChange(event.target.value);
   };

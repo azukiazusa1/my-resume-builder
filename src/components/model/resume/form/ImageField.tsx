@@ -6,16 +6,21 @@ import { useDropzone } from 'react-dropzone';
 
 import httpClient from '@/lib/httpClient';
 import theme from '@/lib/theme';
+import { fieldValueSelectors } from '@/store/filedValueState';
 import { ImageFieldOptions } from '@/store/templateState/types';
+
+const { useFieldValueItem } = fieldValueSelectors;
 
 import { FieldProps } from './Form';
 
 const ImageField: React.VFC<FieldProps<string, ImageFieldOptions>> = ({
   label,
-  value,
+  templateId,
+  fieldId,
   onChange,
   options,
 }) => {
+  const value = useFieldValueItem<string>(templateId, fieldId);
   const [file, setFile] = useState<string | null>(null);
   const [error, setError] = useState(false);
 

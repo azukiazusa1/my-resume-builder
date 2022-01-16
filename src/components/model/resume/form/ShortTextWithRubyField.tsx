@@ -14,7 +14,6 @@ const ShortTextField: React.VFC<FieldProps<ShortTextWithRubyValue>> = ({
   onChange,
 }) => {
   const value = useFieldValueItem<ShortTextWithRubyValue>(templateId, fieldId);
-  console.log({ value });
   const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
     onChange({
       ruby: value ? value.ruby : '',
