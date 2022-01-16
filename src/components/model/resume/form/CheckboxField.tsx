@@ -17,7 +17,7 @@ const CheckboxField: React.FC<FieldProps<boolean>> = ({ label, templateId, field
     <FormControlLabel
       control={
         <Checkbox
-          value={value}
+          checked={value}
           onChange={handleChange}
           inputProps={{
             'aria-label': label,

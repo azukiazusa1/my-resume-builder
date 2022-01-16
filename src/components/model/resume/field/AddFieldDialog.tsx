@@ -83,7 +83,6 @@ const AddFieldDialog: React.FC<Props> = ({ id, children }) => {
   };
 
   const onSubmit = (data: any) => {
-    console.log(data);
     let options: any;
 
     if (data.type === 'table') {

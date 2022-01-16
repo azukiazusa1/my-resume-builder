@@ -34,7 +34,7 @@ const Checkbox: React.VFC<Props> = ({ label, value }) => {
       >
         <Text style={value === true ? styles.circle : {}}>有</Text>
         <Text style={{ marginHorizontal: 12, fontSize: 8, marginTop: 4 }}>●</Text>
-        <Text style={value === false ? {} : styles.circle}>無</Text>
+        <Text style={value === false ? styles.circle : {}}>無</Text>
       </View>
     </Cell>
   );

@@ -3,18 +3,24 @@ import '@testing-library/jest-dom';
 import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
 
+import { FieldProps } from '@/components/model/resume/form/Form';
+import NumberField from '@/components/model/resume/form/NumberField';
 import { NumberFieldOptions } from '@/store/templateState/types';
 
-import { FieldProps } from '../../../../../components/model/resume/form/Form';
-import NumberField from '../../../../../components/model/resume/form/NumberField';
+jest.mock('@/store/filedValueState', () => ({
+  fieldValueSelectors: {
+    useFieldValueItem: () => 25,
+  },
+}));
 
 describe('NumberField component', () => {
   let props: FieldProps<number, NumberFieldOptions>;
 
   beforeEach(() => {
     props = {
+      templateId: 'test-template-id',
+      fieldId: 'test-field-id',
       label: 'test-label',
-      value: 25,
       onChange: jest.fn(),
     };
   });
