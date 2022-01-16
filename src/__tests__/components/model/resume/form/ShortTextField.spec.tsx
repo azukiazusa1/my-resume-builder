@@ -1,10 +1,15 @@
 import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
 
+import { FieldProps } from '@/components/model/resume/form/Form';
+import ShortTextField from '@/components/model/resume/form/ShortTextField';
 import { ShortTextFieldOptions } from '@/store/templateState/types';
 
-import { FieldProps } from '../../../../../components/model/resume/form/Form';
-import ShortTextField from '../../../../../components/model/resume/form/ShortTextField';
+jest.mock('@/store/filedValueState', () => ({
+  fieldValueSelectors: {
+    useFieldValueItem: () => 'test',
+  },
+}));
 
 describe('ShortTextField component', () => {
   let props: FieldProps<string, ShortTextFieldOptions>;
@@ -12,7 +17,8 @@ describe('ShortTextField component', () => {
   beforeEach(() => {
     props = {
       label: 'test-label',
-      value: 'test',
+      templateId: 'test-template-id',
+      fieldId: 'test-field-id',
       onChange: jest.fn(),
     };
   });
@@ -24,7 +30,7 @@ describe('ShortTextField component', () => {
     expect(label?.textContent).toBe('test-label');
   });
 
-  test('propsで渡したvalueが設定される', () => {
+  test('storeから取得したvalueが設定される', () => {
     const { getByTestId } = render(<ShortTextField {...props} />);
     const input = getByTestId('shortText') as HTMLInputElement;
 
@@ -45,11 +51,12 @@ describe('ShortTextField component', () => {
     expect(input.type).toBe('email');
   });
 
-  test('フォームに入力した時onChangeが呼ばれる', () => {
+  test('フォームのフォーカスを離れた時onChangeが呼ばれる', () => {
     const { getByTestId } = render(<ShortTextField {...props} />);
     const input = getByTestId('shortText') as HTMLInputElement;
 
     fireEvent.change(input, { target: { value: 'test2' } });
+    fireEvent.blur(input);
 
     expect(props.onChange).toBeCalledWith('test2');
   });

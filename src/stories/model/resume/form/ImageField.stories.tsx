@@ -15,22 +15,13 @@ const Template: ComponentStory<typeof ImageField> = WithStorybook(ImageField);
 export const Default = Template.bind({});
 Default.args = {
   label: '名前',
-  value: '',
   onChange: (value: string) => console.log(value),
-};
-Default.parameters = {
-  msw: {
-    handlers,
+  options: {
+    width: 120,
+    height: 150,
   },
 };
-
-export const withValue = Template.bind({});
-withValue.args = {
-  label: '名前',
-  value: '/images/sample.png',
-  onChange: (value: string) => console.log(value),
-};
-withValue.parameters = {
+Default.parameters = {
   msw: {
     handlers,
   },
@@ -39,8 +30,11 @@ withValue.parameters = {
 export const FailureBehavior = Template.bind({});
 FailureBehavior.args = {
   label: '名前',
-  value: '',
   onChange: (value: string) => console.log(value),
+  options: {
+    width: 120,
+    height: 150,
+  },
 };
 FailureBehavior.parameters = {
   msw: {

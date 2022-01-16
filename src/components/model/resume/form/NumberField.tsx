@@ -2,16 +2,21 @@ import InputAdornment from '@mui/material/InputAdornment';
 import TextField from '@mui/material/TextField';
 import React from 'react';
 
+import { fieldValueSelectors } from '@/store/filedValueState';
 import { NumberFieldOptions } from '@/store/templateState/types';
+
+const { useFieldValueItem } = fieldValueSelectors;
 
 import { FieldProps } from './Form';
 
 const NumberField: React.FC<FieldProps<number, NumberFieldOptions>> = ({
   label,
-  value,
+  templateId,
+  fieldId,
   onChange,
   options,
 }) => {
+  const value = useFieldValueItem<number>(templateId, fieldId);
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onChange(Number(event.target.value));
   };

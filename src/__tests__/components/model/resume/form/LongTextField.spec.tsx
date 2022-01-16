@@ -1,8 +1,14 @@
 import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
 
-import { FieldProps } from '../../../../../components/model/resume/form/Form';
-import LongTextField from '../../../../../components/model/resume/form/LongTextField';
+import { FieldProps } from '@/components/model/resume/form/Form';
+import LongTextField from '@/components/model/resume/form/LongTextField';
+
+jest.mock('@/store/filedValueState', () => ({
+  fieldValueSelectors: {
+    useFieldValueItem: () => 'test',
+  },
+}));
 
 describe('LongTextField component', () => {
   let props: FieldProps<string>;
@@ -10,7 +16,8 @@ describe('LongTextField component', () => {
   beforeEach(() => {
     props = {
       label: 'test-label',
-      value: 'test',
+      templateId: 'test-template-id',
+      fieldId: 'test-field-id',
       onChange: jest.fn(),
     };
   });
@@ -29,11 +36,12 @@ describe('LongTextField component', () => {
     expect(input.value).toBe('test');
   });
 
-  test('フォームに入力した時onChangeが呼ばれる', () => {
+  test('フォームからフォーカスが離れた時onChangeが呼ばれる', () => {
     const { getByTestId } = render(<LongTextField {...props} />);
     const input = getByTestId('longText') as HTMLInputElement;
 
     fireEvent.change(input, { target: { value: 'test2' } });
+    fireEvent.blur(input);
 
     expect(props.onChange).toBeCalledWith('test2');
   });

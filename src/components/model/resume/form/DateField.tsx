@@ -7,9 +7,14 @@ import TextField from '@mui/material/TextField';
 import type { Dayjs } from 'dayjs';
 import React from 'react';
 
+import { fieldValueSelectors } from '@/store/filedValueState';
+
 import { FieldProps } from './Form';
 
-const DateField: React.FC<FieldProps<string>> = ({ label, value, onChange }) => {
+const { useFieldValueItem } = fieldValueSelectors;
+
+const DateField: React.FC<FieldProps<string>> = ({ label, templateId, fieldId, onChange }) => {
+  const value = useFieldValueItem<string>(templateId, fieldId);
   const handleChange = (date: Dayjs | null) => {
     if (date) {
       onChange(date.format('YYYY-MM-DD'));

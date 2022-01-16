@@ -8,9 +8,18 @@ import React, { useEffect, useState } from 'react';
 import { FieldProps } from '@/components/model/resume/form/Form';
 import useAddressAutocomplete from '@/hooks/useAddressAutocomplete';
 import { PrefectureOption, prefectureOptions } from '@/lib/prefectures';
+import { fieldValueSelectors } from '@/store/filedValueState';
 import { AddressFieldValue } from '@/store/templateState/types';
 
-const AddressField: React.VFC<FieldProps<AddressFieldValue>> = ({ label, value, onChange }) => {
+const { useFieldValueItem } = fieldValueSelectors;
+const AddressField: React.VFC<FieldProps<AddressFieldValue>> = ({
+  label,
+  templateId,
+  fieldId,
+  onChange,
+}) => {
+  const value = useFieldValueItem<AddressFieldValue>(templateId, fieldId);
+
   const [autoFillEnabled, setAutoFillEnabled] = useState(false);
 
   useEffect(() => {
@@ -26,7 +35,7 @@ const AddressField: React.VFC<FieldProps<AddressFieldValue>> = ({ label, value, 
     autoFillEnabled,
   );
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: React.FocusEvent<HTMLInputElement>) => {
     onChange({
       ruby: value?.ruby ?? '',
       postCodeFirst: value?.postCodeFirst ?? '',
@@ -77,8 +86,8 @@ const AddressField: React.VFC<FieldProps<AddressFieldValue>> = ({ label, value, 
         <TextField
           sx={{ '& input': { paddingTop: '4px', paddingBottom: '4px' }, mx: 1, width: 60 }}
           InputLabelProps={{ sx: { fontSize: '0.75rem' } }}
-          value={value?.postCodeFirst}
-          onChange={handleChange}
+          defaultValue={value?.postCodeFirst}
+          onBlur={handleChange}
           variant="outlined"
           size="small"
           inputProps={{
@@ -92,8 +101,8 @@ const AddressField: React.VFC<FieldProps<AddressFieldValue>> = ({ label, value, 
         <TextField
           sx={{ '& input': { paddingTop: '4px', paddingBottom: '4px' }, mx: 1, width: 70 }}
           InputLabelProps={{ sx: { fontSize: '0.75rem' } }}
-          value={value?.postCodeLast}
-          onChange={handleChange}
+          defaultValue={value?.postCodeLast}
+          onBlur={handleChange}
           variant="outlined"
           size="small"
           inputProps={{
@@ -117,8 +126,8 @@ const AddressField: React.VFC<FieldProps<AddressFieldValue>> = ({ label, value, 
           sx={{ '& input': { paddingTop: '4px', paddingBottom: '4px' } }}
           InputLabelProps={{ sx: { fontSize: '0.75rem' } }}
           label="ふりがな"
-          value={value?.ruby}
-          onChange={handleChange}
+          defaultValue={value?.ruby}
+          onBlur={handleChange}
           variant="outlined"
           size="small"
           fullWidth
@@ -145,8 +154,8 @@ const AddressField: React.VFC<FieldProps<AddressFieldValue>> = ({ label, value, 
       </Grid>
       <Grid item xs={12} md={9}>
         <TextField
-          value={value?.address}
-          onChange={handleChange}
+          defaultValue={value?.address}
+          onBlur={handleChange}
           variant="outlined"
           fullWidth
           inputProps={{ 'data-testid': 'address', name: 'address' }}

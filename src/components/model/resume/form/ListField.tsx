@@ -12,6 +12,10 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import React, { useState } from 'react';
 
+import { fieldValueSelectors } from '@/store/filedValueState';
+
+const { useFieldValueItem } = fieldValueSelectors;
+
 import { FieldProps } from './Form';
 
 const ItemList: React.FC<{ value: string[]; onClick: (index: number) => void }> = ({
@@ -42,7 +46,8 @@ const ItemList: React.FC<{ value: string[]; onClick: (index: number) => void }> 
   );
 };
 
-const ListField: React.FC<FieldProps<string[]>> = ({ label, value = [], onChange }) => {
+const ListField: React.FC<FieldProps<string[]>> = ({ label, templateId, fieldId, onChange }) => {
+  const value = useFieldValueItem<string[]>(templateId, fieldId) ?? [];
   const [inputValue, setInputValue] = useState('');
 
   const handleSubmit = () => {

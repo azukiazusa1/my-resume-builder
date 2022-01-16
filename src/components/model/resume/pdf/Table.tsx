@@ -40,7 +40,7 @@ const TableBody: React.VFC<{ columns: TableFieldOptions['columns']; value?: Tabl
             if (!option) return null;
 
             return (
-              <Td key={v.id} width={option.width ?? 100}>
+              <Td key={v.field} width={option.width ?? 100}>
                 {v}
               </Td>
             );

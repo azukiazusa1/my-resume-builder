@@ -1,9 +1,17 @@
 import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
 
-import { FieldProps } from '../../../../../components/model/resume/form/Form';
-import ShortTextWithRubyField from '../../../../../components/model/resume/form/ShortTextWithRubyField';
-import { ShortTextWithRubyValue } from '../../../../../store/templateState/types';
+import { FieldProps } from '@/components/model/resume/form/Form';
+import ShortTextWithRubyField from '@/components/model/resume/form/ShortTextWithRubyField';
+import { ShortTextWithRubyValue } from '@/store/templateState/types';
+
+let mockValue: ShortTextWithRubyValue | undefined = undefined;
+
+jest.mock('@/store/filedValueState', () => ({
+  fieldValueSelectors: {
+    useFieldValueItem: jest.fn(() => mockValue),
+  },
+}));
 
 describe('ShortTextWithRubyField component', () => {
   let props: FieldProps<ShortTextWithRubyValue>;
@@ -11,9 +19,14 @@ describe('ShortTextWithRubyField component', () => {
   beforeEach(() => {
     props = {
       label: 'test-label',
-      value: undefined,
+      fieldId: 'test-field-id',
+      templateId: 'test-template-id',
       onChange: jest.fn(),
     };
+  });
+
+  afterEach(() => {
+    mockValue = undefined;
   });
 
   test('propsで渡したlabelが設定される', () => {
@@ -25,15 +38,8 @@ describe('ShortTextWithRubyField component', () => {
   });
 
   test('ふりがなにはvalue.ruby,shortTextにはvalue.valueが設定される', () => {
-    const { getByTestId } = render(
-      <ShortTextWithRubyField
-        {...props}
-        value={{
-          ruby: 'test-ruby',
-          value: 'test-value',
-        }}
-      />,
-    );
+    mockValue = { value: 'test-value', ruby: 'test-ruby' };
+    const { getByTestId } = render(<ShortTextWithRubyField {...props} />);
     const ruby = getByTestId('ruby') as HTMLInputElement;
     const shortText = getByTestId('shortText') as HTMLInputElement;
 
@@ -41,54 +47,44 @@ describe('ShortTextWithRubyField component', () => {
     expect(shortText.value).toBe('test-value');
   });
 
-  test('ふりがなが入力した時onChangeが呼ばれる', () => {
+  test('ふりがなのフォーカスを離れた時onChangeが呼ばれる', () => {
     const { getByTestId } = render(<ShortTextWithRubyField {...props} />);
     const ruby = getByTestId('ruby') as HTMLInputElement;
 
     fireEvent.change(ruby, { target: { value: 'ruby-test' } });
+    fireEvent.blur(ruby);
 
     expect(props.onChange).toBeCalledWith({ ruby: 'ruby-test', value: '' });
   });
 
-  test('valueが設定されていてふりがなが入力した時onChangeが呼ばれる', () => {
-    const { getByTestId } = render(
-      <ShortTextWithRubyField
-        {...props}
-        value={{
-          ruby: 'test-ruby',
-          value: 'test-value',
-        }}
-      />,
-    );
+  test('valueが設定されていてふりがなのフォーカスを離れた時onChangeが呼ばれる', () => {
+    mockValue = { value: 'test-value', ruby: 'test-ruby' };
+    const { getByTestId } = render(<ShortTextWithRubyField {...props} />);
     const ruby = getByTestId('ruby') as HTMLInputElement;
 
     fireEvent.change(ruby, { target: { value: 'ruby-test' } });
+    fireEvent.blur(ruby);
 
     expect(props.onChange).toBeCalledWith({ ruby: 'ruby-test', value: 'test-value' });
   });
 
-  test('フォームが入力した時onChangeが呼ばれる', () => {
+  test('フォームのフォーカスを離れた時onChangeが呼ばれる', () => {
     const { getByTestId } = render(<ShortTextWithRubyField {...props} />);
     const shortText = getByTestId('shortText') as HTMLInputElement;
 
     fireEvent.change(shortText, { target: { value: 'value2' } });
+    fireEvent.blur(shortText);
 
     expect(props.onChange).toBeCalledWith({ ruby: '', value: 'value2' });
   });
 
-  test('valueが設定されていてふりがなが入力した時onChangeが呼ばれる', () => {
-    const { getByTestId } = render(
-      <ShortTextWithRubyField
-        {...props}
-        value={{
-          ruby: 'test-ruby',
-          value: 'test-value',
-        }}
-      />,
-    );
+  test('valueが設定されていてフォーカスを離れた時onChangeが呼ばれる', () => {
+    mockValue = { value: 'test-value', ruby: 'test-ruby' };
+    const { getByTestId } = render(<ShortTextWithRubyField {...props} />);
     const shortText = getByTestId('shortText') as HTMLInputElement;
 
     fireEvent.change(shortText, { target: { value: 'value2' } });
+    fireEvent.blur(shortText);
 
     expect(props.onChange).toBeCalledWith({ ruby: 'test-ruby', value: 'value2' });
   });

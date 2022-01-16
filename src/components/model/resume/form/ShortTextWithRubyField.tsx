@@ -1,50 +1,36 @@
 import TextField from '@mui/material/TextField';
 import React from 'react';
 
-import { ShortTextWithRubyValue } from '../../../../store/templateState/types';
-import { FieldProps } from './Form';
+import { FieldProps } from '@/components/model/resume/form/Form';
+import { fieldValueSelectors } from '@/store/filedValueState';
+import { ShortTextWithRubyValue } from '@/store/templateState/types';
 
-const ShortTextField: React.FC<FieldProps<ShortTextWithRubyValue>> = ({
+const { useFieldValueItem } = fieldValueSelectors;
+
+const ShortTextField: React.VFC<FieldProps<ShortTextWithRubyValue>> = ({
   label,
-  value,
+  templateId,
+  fieldId,
   onChange,
 }) => {
-  const handleChangeRuby = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (value) {
-      onChange({
-        ...value,
-        ruby: event.target.value,
-      });
-    } else {
-      onChange({
-        ruby: event.target.value,
-        value: '',
-      });
-    }
-  };
-
-  const handleChangeShortText = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (value) {
-      onChange({
-        ...value,
-        value: event.target.value,
-      });
-    } else {
-      onChange({
-        ruby: '',
-        value: event.target.value,
-      });
-    }
+  const value = useFieldValueItem<ShortTextWithRubyValue>(templateId, fieldId);
+  const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+    onChange({
+      ruby: value ? value.ruby : '',
+      value: value ? value.value : '',
+      [event.target.name]: event.target.value,
+    });
   };
 
   return (
     <>
       <TextField
         sx={{ '& input': { paddingTop: '4px', paddingBottom: '4px' } }}
+        name="ruby"
         InputLabelProps={{ sx: { fontSize: '0.75rem' } }}
         label="ふりがな"
-        value={value?.ruby}
-        onChange={handleChangeRuby}
+        defaultValue={value?.ruby}
+        onBlur={handleBlur}
         variant="outlined"
         size="small"
         fullWidth
@@ -52,9 +38,10 @@ const ShortTextField: React.FC<FieldProps<ShortTextWithRubyValue>> = ({
       />
       <TextField
         sx={{ mt: 1 }}
+        name="value"
         label={label}
-        value={value?.value}
-        onChange={handleChangeShortText}
+        defaultValue={value?.value}
+        onBlur={handleBlur}
         variant="outlined"
         fullWidth
         inputProps={{ 'data-testid': 'shortText' }}

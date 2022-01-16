@@ -3,37 +3,40 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { DataGrid, GridCellEditCommitParams } from '@mui/x-data-grid';
 import dayjs from 'dayjs';
-import React, { useCallback } from 'react';
+import React from 'react';
 
+import { fieldValueSelectors } from '@/store/filedValueState';
 import type { TableFieldOptions, TableFieldValue } from '@/store/templateState/types';
+
+const { useFieldValueItem } = fieldValueSelectors;
 
 import type { FieldProps } from './Form';
 
 const TableField: React.FC<FieldProps<TableFieldValue, TableFieldOptions>> = ({
   label,
-  value = [],
+  templateId,
+  fieldId,
   onChange,
   options,
 }) => {
   if (!options) {
     throw new Error('TableField requires options');
   }
-  const handleCellEditCommit = useCallback(
-    (params: GridCellEditCommitParams) => {
-      const newValue = value.map((row) => {
-        const value =
-          params.value instanceof Date ? dayjs(params.value).format('YYYY/MM/DD') : params.value;
-        if (row.id === params.id) {
-          return { ...row, [params.field]: value };
-        } else {
-          return row;
-        }
-      });
 
-      onChange(newValue);
-    },
-    [onChange, value],
-  );
+  const value = useFieldValueItem<TableFieldValue>(templateId, fieldId) ?? [];
+  const handleCellEditCommit = (params: GridCellEditCommitParams) => {
+    const newValue = value.map((row) => {
+      const value =
+        params.value instanceof Date ? dayjs(params.value).format('YYYY/MM/DD') : params.value;
+      if (row.id === params.id) {
+        return { ...row, [params.field]: value };
+      } else {
+        return row;
+      }
+    });
+
+    onChange(newValue);
+  };
 
   const addRow = () => {
     onChange([
