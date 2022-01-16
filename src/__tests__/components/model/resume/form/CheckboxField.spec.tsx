@@ -6,13 +6,22 @@ import React from 'react';
 import CheckboxField from '@/components/model/resume/form/CheckboxField';
 import { FieldProps } from '@/components/model/resume/form/Form';
 
+let mockValue: boolean | undefined = undefined;
+
+jest.mock('@/store/filedValueState', () => ({
+  fieldValueSelectors: {
+    useFieldValueItem: jest.fn(() => mockValue),
+  },
+}));
+
 describe('components/model/resume/form/CheckboxField', () => {
   let props: FieldProps<boolean>;
 
   beforeEach(() => {
     props = {
       label: 'test-label',
-      value: false,
+      templateId: 'test-template-id',
+      fieldId: 'test-field-id',
       onChange: jest.fn(),
     };
   });
@@ -22,14 +31,16 @@ describe('components/model/resume/form/CheckboxField', () => {
     expect(getByText('test-label')).toBeInTheDocument();
   });
 
-  test('propsで渡したvalueが設定される', () => {
-    const { container } = render(<CheckboxField {...props} value={true} />);
+  test('storeのvalueが設定される', () => {
+    mockValue = true;
+    const { container } = render(<CheckboxField {...props} />);
     const input = container.querySelector('input');
     expect(input?.value).toBe('true');
   });
 
   test('フォームに入力した時onChangeが呼ばれる - 初期値がtrue', () => {
-    const { container } = render(<CheckboxField {...props} value={true} />);
+    mockValue = true;
+    const { container } = render(<CheckboxField {...props} />);
     const input = container.querySelector('input');
 
     fireEvent.click(input!);
@@ -37,7 +48,8 @@ describe('components/model/resume/form/CheckboxField', () => {
   });
 
   test('フォームに入力した時onChangeが呼ばれる - 初期値がfalse', () => {
-    const { container } = render(<CheckboxField {...props} value={false} />);
+    mockValue = false;
+    const { container } = render(<CheckboxField {...props} />);
     const input = container.querySelector('input');
 
     fireEvent.click(input!);

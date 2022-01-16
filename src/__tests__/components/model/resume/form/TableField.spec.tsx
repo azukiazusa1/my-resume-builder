@@ -5,34 +5,43 @@ import { FieldProps } from '@/components/model/resume/form/Form';
 import TableField from '@/components/model/resume/form/TableField';
 import type { TableFieldOptions, TableFieldValue } from '@/store/templateState/types';
 
+let mockValue: TableFieldValue | undefined = [
+  {
+    id: 1,
+    yearMonth: '2010/03/01',
+    personalHistory: '〇〇高校卒業',
+  },
+  {
+    id: 2,
+    yearMonth: '2014/03/01',
+    personalHistory: '〇〇大学卒業',
+  },
+  {
+    id: 3,
+    yearMonth: '2016/03/01',
+    personalHistory: '〇〇大学院卒業',
+  },
+  {
+    id: 4,
+    yearMonth: '2016/04/01',
+    personalHistory: '△△会社入社',
+  },
+];
+
+jest.mock('@/store/filedValueState', () => ({
+  fieldValueSelectors: {
+    useFieldValueItem: jest.fn(() => mockValue),
+  },
+}));
+
 describe('TableField component', () => {
   let props: FieldProps<TableFieldValue, TableFieldOptions>;
 
   beforeEach(() => {
     props = {
       label: 'test-label',
-      value: [
-        {
-          id: 1,
-          yearMonth: '2010/03/01',
-          personalHistory: '〇〇高校卒業',
-        },
-        {
-          id: 2,
-          yearMonth: '2014/03/01',
-          personalHistory: '〇〇大学卒業',
-        },
-        {
-          id: 3,
-          yearMonth: '2016/03/01',
-          personalHistory: '〇〇大学院卒業',
-        },
-        {
-          id: 4,
-          yearMonth: '2016/04/01',
-          personalHistory: '△△会社入社',
-        },
-      ],
+      fieldId: 'test-field-id',
+      templateId: 'test-template-id',
       onChange: jest.fn(),
       options: {
         columns: [
@@ -76,7 +85,7 @@ describe('TableField component', () => {
 
     fireEvent.click(addButton);
     expect(props.onChange).toHaveBeenCalledWith([
-      ...props.value!,
+      ...mockValue!,
       {
         id: 5,
         yearMonth: null,
