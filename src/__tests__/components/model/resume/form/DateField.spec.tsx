@@ -1,8 +1,14 @@
 import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
 
-import DateField from '../../../../../components/model/resume/form/DateField';
-import { FieldProps } from '../../../../../components/model/resume/form/Form';
+import DateField from '@/components/model/resume/form/DateField';
+import { FieldProps } from '@/components/model/resume/form/Form';
+
+jest.mock('@/store/filedValueState', () => ({
+  fieldValueSelectors: {
+    useFieldValueItem: () => '2021-12-24',
+  },
+}));
 
 describe('DateField component', () => {
   let props: FieldProps<string>;
@@ -10,7 +16,8 @@ describe('DateField component', () => {
   beforeEach(() => {
     props = {
       label: 'test-label',
-      value: '2021-12-24',
+      templateId: 'test-template-id',
+      fieldId: 'test-field-id',
       onChange: jest.fn(),
     };
   });

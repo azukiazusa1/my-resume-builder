@@ -1,8 +1,16 @@
 import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
 
-import { FieldProps } from '../../../../../components/model/resume/form/Form';
-import ListField from '../../../../../components/model/resume/form/ListField';
+import { FieldProps } from '@/components/model/resume/form/Form';
+import ListField from '@/components/model/resume/form/ListField';
+
+let mockValue: string[] | undefined = undefined;
+
+jest.mock('@/store/filedValueState', () => ({
+  fieldValueSelectors: {
+    useFieldValueItem: jest.fn(() => mockValue),
+  },
+}));
 
 describe('ListField component', () => {
   let props: FieldProps<string[]>;
@@ -10,9 +18,14 @@ describe('ListField component', () => {
   beforeEach(() => {
     props = {
       label: 'test-label',
-      value: [],
+      templateId: 'test-template-id',
+      fieldId: 'test-field-id',
       onChange: jest.fn(),
     };
+  });
+
+  afterEach(() => {
+    mockValue = undefined;
   });
 
   test('propsで渡したlabelが設定される', () => {
@@ -50,14 +63,16 @@ describe('ListField component', () => {
   });
 
   test('リスト形式でvalueが描画される', () => {
-    const { container } = render(<ListField {...props} value={['1', '2', '3']} />);
+    mockValue = ['1', '2', '3'];
+    const { container } = render(<ListField {...props} />);
     const lists = container.querySelectorAll('li');
 
     expect(lists.length).toBe(3);
   });
 
   test('削除ボタンをクリックした時onChangeが呼ばれる', () => {
-    const { getAllByRole } = render(<ListField {...props} value={['1', '2', '3']} />);
+    mockValue = ['1', '2', '3'];
+    const { getAllByRole } = render(<ListField {...props} />);
     const buttons = getAllByRole('button', { name: 'delete' });
     fireEvent.click(buttons[1]);
 

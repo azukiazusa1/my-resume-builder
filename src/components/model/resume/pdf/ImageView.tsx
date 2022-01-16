@@ -20,8 +20,8 @@ const ImageView: React.VFC<Props> = ({ label, value, options }) => {
       ) : (
         <View
           style={{
-            width: 128,
-            height: 160,
+            width: options.width,
+            height: options.height,
             backgroundColor: '#e0e0e0',
             justifyContent: 'center',
             alignItems: 'center',

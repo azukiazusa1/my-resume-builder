@@ -1,8 +1,7 @@
-import { ComponentMeta,ComponentStory } from '@storybook/react';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 
+import LongTextField from '@/components/model/resume/form/LongTextField';
 import WithStorybook from '@/stories/utils/WithStorybook';
-
-import LongTextField from '../../../../components/model/resume/form/LongTextField';
 
 export default {
   title: 'model/resume/form/LongTextField',
@@ -14,6 +13,5 @@ const Template: ComponentStory<typeof LongTextField> = WithStorybook(LongTextFie
 export const Default = Template.bind({});
 Default.args = {
   label: '名前',
-  value: '',
   onChange: (value: string) => console.log(value),
 };

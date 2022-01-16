@@ -4,7 +4,7 @@ import CardContent from '@mui/material/CardContent';
 import Grid from '@mui/material/Grid';
 import React from 'react';
 
-import { fieldValueActions, fieldValueSelectors } from '@/store/filedValueState';
+import { fieldValueActions } from '@/store/filedValueState';
 import { templateSelectors } from '@/store/templateState';
 import { Field } from '@/store/templateState/types';
 
@@ -20,67 +20,128 @@ import ShortTextWithRubyField from './ShortTextWithRubyField';
 import TableField from './TableField';
 
 type Props = {
+  /** テンプレートのID */
   id: string;
 };
 
 export type FieldProps<T, U = {}> = {
+  /** フォームのラベル */
   label: string;
-  value: T | undefined;
+  /** テンプレートのID */
+  templateId: string;
+  /** フィールドのID */
+  fieldId: string;
+  /** フィールドの更新をハンドリングする */
   onChange: (value: T) => void;
+  /** フィールドのオプション */
   options?: U;
 };
 
 /**
  * フィールドのタイプに対応するコンポーネント
  */
-function componentMapping(field: Field, value: any, onChange: (value: any) => void) {
+function componentMapping(field: Field, templateId: string, onChange: (value: any) => void) {
   switch (field.type) {
     case 'shortText':
       return (
         <ShortTextField
           label={field.label}
+          templateId={templateId}
+          fieldId={field.fieldId}
           options={field.options}
-          value={value}
           onChange={onChange}
         />
       );
     case 'shortTextWithRuby':
-      return <ShortTextWithRubyField label={field.label} value={value} onChange={onChange} />;
+      return (
+        <ShortTextWithRubyField
+          label={field.label}
+          templateId={templateId}
+          fieldId={field.fieldId}
+          onChange={onChange}
+        />
+      );
     case 'longText':
-      return <LongTextField label={field.label} value={value} onChange={onChange} />;
+      return (
+        <LongTextField
+          label={field.label}
+          templateId={templateId}
+          fieldId={field.fieldId}
+          onChange={onChange}
+        />
+      );
     case 'image':
       return (
-        <ImageField label={field.label} value={value} onChange={onChange} options={field.options} />
+        <ImageField
+          label={field.label}
+          templateId={templateId}
+          fieldId={field.fieldId}
+          onChange={onChange}
+          options={field.options}
+        />
       );
     case 'checkbox':
-      return <CheckboxField label={field.label} value={value} onChange={onChange} />;
+      return (
+        <CheckboxField
+          label={field.label}
+          templateId={templateId}
+          fieldId={field.fieldId}
+          onChange={onChange}
+        />
+      );
     case 'address':
-      return <AddressField label={field.label} value={value} onChange={onChange} />;
+      return (
+        <AddressField
+          label={field.label}
+          templateId={templateId}
+          fieldId={field.fieldId}
+          onChange={onChange}
+        />
+      );
     case 'number':
       return (
         <NumberField
           label={field.label}
           options={field.options}
-          value={value}
+          templateId={templateId}
+          fieldId={field.fieldId}
           onChange={onChange}
         />
       );
     case 'date':
-      return <DateField label={field.label} value={value} onChange={onChange} />;
+      return (
+        <DateField
+          label={field.label}
+          templateId={templateId}
+          fieldId={field.fieldId}
+          onChange={onChange}
+        />
+      );
     case 'list':
-      return <ListField label={field.label} value={value} onChange={onChange} />;
+      return (
+        <ListField
+          label={field.label}
+          templateId={templateId}
+          fieldId={field.fieldId}
+          onChange={onChange}
+        />
+      );
     case 'table':
       return (
-        <TableField label={field.label} options={field.options} value={value} onChange={onChange} />
+        <TableField
+          label={field.label}
+          options={field.options}
+          templateId={templateId}
+          fieldId={field.fieldId}
+          onChange={onChange}
+        />
       );
   }
 }
 
 const ResumeForm: React.FC<Props> = ({ id }) => {
   const { useTemplateItem } = templateSelectors;
-  const { useFieldValueItem } = fieldValueSelectors;
   const { useSetFieldValue } = fieldValueActions;
-  const fieldValue = useFieldValueItem(id);
   const setFieldValue = useSetFieldValue();
   const template = useTemplateItem(id);
 
@@ -102,9 +163,7 @@ const ResumeForm: React.FC<Props> = ({ id }) => {
                 sx={{ my: 2 }}
                 data-testid="field"
               >
-                {componentMapping(field, fieldValue[field.fieldId], (value) =>
-                  setFieldValue(id, field.fieldId, value),
-                )}
+                {componentMapping(field, id, (value) => setFieldValue(id, field.fieldId, value))}
               </Grid>
             ))}
           </Grid>
