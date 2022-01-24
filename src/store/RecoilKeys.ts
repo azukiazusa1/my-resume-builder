@@ -12,5 +12,7 @@ export enum RecoilAtomKeys {
 export enum RecoilSelectorKeys {
   TEMPLATE_LIST = 'templateList',
   SELECTED_TEMPLATE_ITEM = 'selectedTemplateItem',
-  FIELD_VALUE_ITEM = 'fieldValueItem'
+  FIELD_VALUE_ITEM = 'fieldValueItem',
+  FIELD_VALUE_ITEM_LIST = 'fieldValueItemList',
+  FIELDVALUE_LAST_UPDATE = 'fieldValueLastUpdate'
 }
