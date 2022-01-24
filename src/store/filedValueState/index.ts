@@ -35,10 +35,25 @@ const fieldValueSelector = selectorFamily<string | undefined, { templateId: stri
  * テンプレートIDを指定して、テンプレートのフィールドの値一覧を取得する
  */
 const templateValueSelector = selectorFamily<Record<string, unknown>, { templateId: string }>({
-  key: RecoilSelectorKeys.SELECTED_TEMPLATE_ITEM,
+  key: RecoilSelectorKeys.FIELD_VALUE_ITEM_LIST,
   get: ({ templateId }) => ({ get }) => {
     const fieldValue = get(fieldValueState)
     return fieldValue[templateId]
+  }
+})
+
+/**
+ * テンプレートIDを指定して最終更新日時を取得する
+ */
+const templateLastUpdateSelector = selectorFamily<string | undefined, { templateId: string }>({
+  key: RecoilSelectorKeys.FIELDVALUE_LAST_UPDATE,
+  get: ({ templateId }) => ({ get }) => {
+    const fieldValue = get(fieldValueState)
+    const templateField = fieldValue[templateId]
+    if (!templateField) {
+      return undefined
+    }
+    return templateField.lastUpdate as string
   }
 })
 
@@ -61,6 +76,10 @@ export const fieldValueSelectors: FieldValueSelectors = {
       return {}
     }
     return recoilValue
+  },
+  useTemplateLastUpdate: (templateId: string): string | undefined => {
+    const recoilValue = useRecoilValue(templateLastUpdateSelector({ templateId }))
+    return recoilValue
   }
 }
 
@@ -71,6 +90,7 @@ export const fieldValueActions: FieldValueActions = {
       set(fieldValueState, prev => {
         const copy = cloneDeep(prev)
         copy[templateId] = { ...copy[templateId], [fieldId]: value }
+        copy[templateId].lastUpdate = new Date().toISOString()
         return copy
       })
     })
