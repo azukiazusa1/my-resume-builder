@@ -1,10 +1,17 @@
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import IconButton from '@mui/material/IconButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import React, { useState } from 'react';
 
+import AddFieldDialog from '@/components/model/resume/field/AddFieldDialog';
 import DeleteConfirmDialog from '@/components/ui/DeleteConfirmDialog';
+import { templateActions } from '@/store/templateState';
+const { useRemoveField } = templateActions;
 
 type Props = {
   id: string;
@@ -15,6 +22,9 @@ const FieldMenu: React.VFC<Props> = ({ id, fieldId }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const open = Boolean(anchorEl);
+
+  const removeField = useRemoveField();
+
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -33,7 +43,6 @@ const FieldMenu: React.VFC<Props> = ({ id, fieldId }) => {
         <MoreVertIcon />
       </IconButton>
       <Menu
-        id="basic-menu"
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
@@ -41,9 +50,20 @@ const FieldMenu: React.VFC<Props> = ({ id, fieldId }) => {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem onClick={handleClose}>編集</MenuItem>
-        <MenuItem onClick={() => setDeleteDialogOpen(true)}>削除</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        <AddFieldDialog id={id} fieldId={fieldId}>
+          <MenuItem>
+            <ListItemIcon>
+              <EditIcon />
+            </ListItemIcon>
+            <ListItemText>編集</ListItemText>
+          </MenuItem>
+        </AddFieldDialog>
+        <MenuItem onClick={() => setDeleteDialogOpen(true)}>
+          <ListItemIcon>
+            <DeleteIcon />
+          </ListItemIcon>
+          <ListItemText>削除</ListItemText>
+        </MenuItem>
       </Menu>
       <DeleteConfirmDialog
         open={deleteDialogOpen}
@@ -53,7 +73,8 @@ const FieldMenu: React.VFC<Props> = ({ id, fieldId }) => {
         handleCancel={() => setDeleteDialogOpen(false)}
         handleConfirm={() => {
           setDeleteDialogOpen(false);
-          console.log('delete', id, fieldId);
+          handleClose();
+          removeField(id, fieldId);
         }}
       />
     </>
