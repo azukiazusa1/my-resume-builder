@@ -70,7 +70,7 @@ const AddFieldDialog: React.FC<Props> = ({ id, fieldId, children }) => {
     defaultValues = {
       type: 'shortText' as Field['type'],
       label: '',
-      options: { defaultOptions },
+      options: defaultOptions(),
     };
   }
   const {
@@ -105,7 +105,6 @@ const AddFieldDialog: React.FC<Props> = ({ id, fieldId, children }) => {
     }
 
     if (fieldItem) {
-      console.log({ data });
       editField(id, data);
     } else {
       addField(id, {
@@ -179,7 +178,7 @@ const AddFieldDialog: React.FC<Props> = ({ id, fieldId, children }) => {
           <DialogActions>
             <Button onClick={handleClose}>キャンセル</Button>
             <Button type="submit" onClick={handleSubmit(onSubmit)}>
-              追加
+              {fieldItem ? '編集' : '追加'}
             </Button>
           </DialogActions>
         </form>

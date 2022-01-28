@@ -141,7 +141,7 @@ function componentMapping(field: Field, templateId: string, onChange: (value: an
 }
 
 const ResumeForm: React.FC<Props> = ({ id }) => {
-  const [hover, setHover] = useState<string>(null);
+  const [hover, setHover] = useState<string | null>(null);
   const { useTemplateItem } = templateSelectors;
   const { useSetFieldValue } = fieldValueActions;
   const setFieldValue = useSetFieldValue();
@@ -165,7 +165,7 @@ const ResumeForm: React.FC<Props> = ({ id }) => {
                 sx={{ my: 2, display: 'flex', alignItems: 'start' }}
                 data-testid="field"
                 onMouseEnter={() => setHover(field.fieldId)}
-                onMouseLeave={() => setHover(false)}
+                onMouseLeave={() => setHover(null)}
               >
                 <div style={{ width: '90%' }}>
                   {componentMapping(field, id, (value) => setFieldValue(id, field.fieldId, value))}
