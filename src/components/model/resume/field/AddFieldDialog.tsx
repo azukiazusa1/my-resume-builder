@@ -13,9 +13,9 @@ import { useTheme } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { cloneDeep } from 'lodash-es';
+import { nanoid } from 'nanoid';
 import React from 'react';
 import { Control, Controller, useForm } from 'react-hook-form';
-import { v4 as uuidv4 } from 'uuid';
 
 import { templateActions, templateSelectors } from '@/store/templateState';
 import { Field, fieldTypes } from '@/store/templateState/types';
@@ -46,7 +46,7 @@ const optionsForm = (type: Field['type'], control: Control<any>, errors: { [x: s
 };
 
 export const defaultColmunValue = () => ({
-  field: uuidv4(),
+  field: nanoid(),
   width: 100,
   headerName: '',
   editable: true,
@@ -108,7 +108,7 @@ const AddFieldDialog: React.FC<Props> = ({ id, fieldId, children }) => {
       editField(id, data);
     } else {
       addField(id, {
-        fieldId: uuidv4(),
+        fieldId: nanoid(),
         type: data.type,
         label: data.label,
         options,
