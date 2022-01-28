@@ -17,17 +17,19 @@ import React from 'react';
 import { Control, Controller, useForm } from 'react-hook-form';
 import { v4 as uuidv4 } from 'uuid';
 
-import { templateActions } from '@/store/templateState';
+import { templateActions, templateSelectors } from '@/store/templateState';
 import { Field, fieldTypes } from '@/store/templateState/types';
 
 import ImageFieldOptionsForm from './ImageFieldOptionsForm';
 import NumberFieldOptionsForm from './NumberFieldOptionsForm';
 import TableFieldOptionsForm from './TableFieldOptionsForm';
 
-const { useAddField } = templateActions;
+const { useAddField, useEditField } = templateActions;
+const { useTemplateFieldItem } = templateSelectors;
 
 type Props = {
   id: string;
+  fieldId?: string;
 };
 
 const optionsForm = (type: Field['type'], control: Control<any>, errors: { [x: string]: any }) => {
@@ -51,25 +53,34 @@ export const defaultColmunValue = () => ({
   type: 'string',
 });
 
-const AddFieldDialog: React.FC<Props> = ({ id, children }) => {
+const defaultOptions = () => ({
+  columns: [defaultColmunValue()],
+  unit: '',
+  width: 120,
+  height: 150,
+});
+
+const AddFieldDialog: React.FC<Props> = ({ id, fieldId, children }) => {
+  const fieldItem = useTemplateFieldItem(id, fieldId);
+  let defaultValues: any;
+
+  if (fieldItem) {
+    defaultValues = cloneDeep(fieldItem);
+  } else {
+    defaultValues = {
+      type: 'shortText' as Field['type'],
+      label: '',
+      options: { defaultOptions },
+    };
+  }
   const {
     watch,
     handleSubmit,
     formState: { errors },
     control,
-  } = useForm({
-    defaultValues: {
-      type: 'shortText' as Field['type'],
-      label: '',
-      options: {
-        columns: [defaultColmunValue()],
-        unit: '',
-        width: 120,
-        height: 150,
-      },
-    },
-  });
+  } = useForm({ defaultValues });
   const addField = useAddField();
+  const editField = useEditField();
   const [open, setOpen] = React.useState(false);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
@@ -93,13 +104,18 @@ const AddFieldDialog: React.FC<Props> = ({ id, children }) => {
       options = { unit: data.options.unit };
     }
 
-    addField(id, {
-      fieldId: uuidv4(),
-      type: data.type,
-      label: data.label,
-      options,
-      block: 12,
-    });
+    if (fieldItem) {
+      console.log({ data });
+      editField(id, data);
+    } else {
+      addField(id, {
+        fieldId: uuidv4(),
+        type: data.type,
+        label: data.label,
+        options,
+        block: 12,
+      });
+    }
     setOpen(false);
   };
   return (
@@ -107,7 +123,7 @@ const AddFieldDialog: React.FC<Props> = ({ id, children }) => {
       {React.cloneElement(children as React.ReactElement<any>, { onClick: handleClickOpen })}
       <Dialog fullWidth fullScreen={fullScreen} maxWidth="md" open={open} onClose={handleClose}>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <DialogTitle>フィールドを追加</DialogTitle>
+          <DialogTitle>{fieldItem ? 'フィールドを編集' : 'フィールドを追加'}</DialogTitle>
           <DialogContent>
             <Grid container spacing={2} sx={{ py: { xs: 0, md: 4 } }}>
               <Grid item xs={12} md={8}>
@@ -141,7 +157,7 @@ const AddFieldDialog: React.FC<Props> = ({ id, children }) => {
                     required: 'タイプを選択してください。',
                   }}
                   render={({ field }) => (
-                    <FormControl fullWidth error={Boolean(errors.type)}>
+                    <FormControl fullWidth error={Boolean(errors.type)} disabled={!!fieldItem}>
                       <InputLabel id="demo-simple-select-label">タイプ</InputLabel>
                       <Select {...field} variant="standard" id="type" label="タイプ" required>
                         {fieldTypes.map(({ type, label }) => (
