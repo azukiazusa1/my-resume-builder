@@ -198,6 +198,25 @@ export const templateActions: TemplateActions = {
         return replaceItemAtIndex(prev, index, copy)
       })
     }),
+  useEditField: () =>
+    useRecoilCallback(({ set }) => (id: string, field: Field) => {
+      set(templateState, prev => {
+        const index = prev.findIndex(v => v.id === id)
+        if (index === -1) {
+          throw new Error('not found template id: ' + id)
+        }
+
+        const copy = cloneDeep(prev[index])
+        const fieldIndex = copy.fields.findIndex(v => v.fieldId === field.fieldId)
+        if (fieldIndex === -1) {
+          throw new Error('not found field id: ' + field.fieldId)
+        }
+
+        copy.fields = replaceItemAtIndex(copy.fields, fieldIndex, cloneDeep(field))
+
+        return replaceItemAtIndex(prev, index, copy)
+      })
+    }),
   useRemoveField: () =>
     useRecoilCallback(({ set }) => (id: string, fieldId: string) => {
       set(templateState, prev => {
@@ -255,7 +274,28 @@ const selectedTemplateItemSelector = selectorFamily<Template, string>({
   }
 })
 
+
+/**
+ * テンプレートIDとフィールドIDを指定してフィールドを取得する
+ */
+const templateFieldSelector = selectorFamily<Field | null, { id: string, fieldId?: string }>({
+  key: RecoilSelectorKeys.SELECTED_TEMPLATE_FIELD_ITEM,
+  get: ({ id, fieldId }) => ({ get }) => {
+    if (fieldId === undefined) {
+      return null
+    }
+    const template = get(selectedTemplateItemSelector(id))
+    const field = template.fields.find(v => v.fieldId === fieldId)
+
+    if (!field) {
+      throw new Error('field is not found')
+    }
+    return field
+  }
+})
+
 export const templateSelectors: TemplateSelectors = {
   useTemplates: () => useRecoilValue(templateListSelector),
-  useTemplateItem: (id: string) => useRecoilValue(selectedTemplateItemSelector(id))
+  useTemplateItem: (id: string) => useRecoilValue(selectedTemplateItemSelector(id)),
+  useTemplateFieldItem: (id: string, fieldId?: string) => useRecoilValue(templateFieldSelector({ id, fieldId }))
 }

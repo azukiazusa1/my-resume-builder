@@ -2,12 +2,13 @@ import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Grid from '@mui/material/Grid';
-import React from 'react';
+import React, { useState } from 'react';
 
 import { fieldValueActions } from '@/store/filedValueState';
 import { templateSelectors } from '@/store/templateState';
 import { Field } from '@/store/templateState/types';
 
+import FieldMenu from '../field/FieldMenu';
 import AddressField from './AddressField';
 import CheckboxField from './CheckboxField';
 import DateField from './DateField';
@@ -140,6 +141,7 @@ function componentMapping(field: Field, templateId: string, onChange: (value: an
 }
 
 const ResumeForm: React.FC<Props> = ({ id }) => {
+  const [hover, setHover] = useState<string | null>(null);
   const { useTemplateItem } = templateSelectors;
   const { useSetFieldValue } = fieldValueActions;
   const setFieldValue = useSetFieldValue();
@@ -160,10 +162,17 @@ const ResumeForm: React.FC<Props> = ({ id }) => {
                 key={field.fieldId}
                 xs={12}
                 md={field.block}
-                sx={{ my: 2 }}
+                sx={{ my: 2, display: 'flex', alignItems: 'start' }}
                 data-testid="field"
+                onMouseEnter={() => setHover(field.fieldId)}
+                onMouseLeave={() => setHover(null)}
               >
-                {componentMapping(field, id, (value) => setFieldValue(id, field.fieldId, value))}
+                <div style={{ width: '90%' }}>
+                  {componentMapping(field, id, (value) => setFieldValue(id, field.fieldId, value))}
+                </div>
+                <div style={{ visibility: hover === field.fieldId ? 'visible' : 'hidden' }}>
+                  <FieldMenu id={id} fieldId={field.fieldId} />
+                </div>
               </Grid>
             ))}
           </Grid>

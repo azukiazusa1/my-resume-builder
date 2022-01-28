@@ -90,6 +90,7 @@ export type TemplateState = Template[];
 
 export type TemplateActions = {
   useAddField: () => (id: string, field: Omit<Field, 'order'>) => void;
+  useEditField: () => (id: string, field: Field) => void;
   useRemoveField: () => (id: string, fieldId: string) => void;
   useEditTitle: () => (id: string, title: string) => void;
 }
@@ -97,6 +98,7 @@ export type TemplateActions = {
 export type TemplateSelectors = {
   useTemplates: () => Template[];
   useTemplateItem: (id: string) => Template;
+  useTemplateFieldItem: (id: string, fieldId?: string) => Field | null;
 }
 
 
