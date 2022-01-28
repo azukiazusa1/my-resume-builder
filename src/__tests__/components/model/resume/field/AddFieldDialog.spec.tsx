@@ -6,10 +6,16 @@ import React from 'react';
 import AddFieldDialog from '@/components/model/resume/field/AddFieldDialog';
 
 const mockAddField = jest.fn();
+const mockEditField = jest.fn();
+let mockTemplateFieldItem: any = null;
 
 jest.mock('@/store/templateState', () => ({
   templateActions: {
     useAddField: () => mockAddField,
+    useEditField: () => mockEditField,
+  },
+  templateSelectors: {
+    useTemplateFieldItem: () => mockTemplateFieldItem,
   },
 }));
 
@@ -21,7 +27,11 @@ const ui = () => (
 
 describe('components/model/resume/field/AddFieldDialog', () => {
   beforeEach(() => {
+    mockTemplateFieldItem = null;
+  });
+  afterEach(() => {
     mockAddField.mockClear();
+    mockEditField.mockClear();
   });
 
   test('childrenをクリックするとダイアログが表示される', () => {
@@ -91,7 +101,7 @@ describe('components/model/resume/field/AddFieldDialog', () => {
   });
 
   test('type：数値を入力すると単位入力が表示される', async () => {
-    const { getByTestId, getByText, getByRole } = render(ui());
+    const { getByTestId, getByText } = render(ui());
 
     const children = getByTestId('children');
     fireEvent.click(children);
@@ -431,6 +441,49 @@ describe('components/model/resume/field/AddFieldDialog', () => {
             },
           ],
         },
+      }),
+    );
+  });
+
+  test('useTemplateFieldItem が null 以外を返すとき編集モードとなる', async () => {
+    mockTemplateFieldItem = {
+      label: 'test',
+      type: 'list',
+    };
+    const { getByTestId, getByText } = render(ui());
+
+    const children = getByTestId('children');
+    fireEvent.click(children);
+
+    await waitFor(() => expect(getByText('フィールドを編集')).toBeInTheDocument());
+
+    const input = getByTestId('field-name-input');
+    expect(input).toHaveValue('test');
+  });
+
+  test('編集モードのとき submit すると editField が呼ばれる', async () => {
+    mockTemplateFieldItem = {
+      label: 'test',
+      type: 'list',
+    };
+    const { getByTestId, getByText, queryByText } = render(ui());
+
+    const children = getByTestId('children');
+    fireEvent.click(children);
+
+    const input = getByTestId('field-name-input');
+    fireEvent.change(input, { target: { value: 'test2' } });
+
+    const addButton = getByText('編集');
+    fireEvent.click(addButton);
+
+    await waitFor(() => expect(queryByText('フィールドを編集')).not.toBeInTheDocument());
+
+    expect(mockEditField).toHaveBeenCalledWith(
+      'resume',
+      expect.objectContaining({
+        label: 'test2',
+        type: 'list',
       }),
     );
   });
